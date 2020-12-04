@@ -1,9 +1,10 @@
 import * as React from "react";
+import RouterManager from "./Component/RouterManager/RouterManager";
 
 function App() {
   return (
     <div className="App">
-      <h1>HELLO TRUTH METER</h1>{" "}
+      <RouterManager />
     </div>
   );
 }
