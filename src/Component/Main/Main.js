@@ -41,10 +41,11 @@ class Main extends Component {
       }
     });
   };
-
+  //isnt connected to firebase(?)
   render() {
     return (
       <div>
+        {this.state.posts}
         {this.state.posts.map((post, index) => {
           return <PostCard key={index} data={post} />;
         })}
