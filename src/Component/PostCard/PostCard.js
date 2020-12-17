@@ -2,10 +2,9 @@ import React from "react";
 
 const PostCard = (props) => {
   return (
-    <div>
+    <div style={{ border: "1px solid black", margin: "10px" }}>
       <h1>{props.data.title}</h1>
-      <h4>{props.data.link}</h4>
-      <button onClick={() => console.log(props.data.link)}>as</button>
+      <a href={props.data.link}>{props.data.link}</a>
     </div>
   );
 };

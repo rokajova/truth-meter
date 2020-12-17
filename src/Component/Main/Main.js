@@ -8,7 +8,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoaded: true,
+      isLoaded: false,
       posts: [],
     };
   }
@@ -41,14 +41,14 @@ class Main extends Component {
       }
     });
   };
-  //isnt connected to firebase(?)
   render() {
     return (
       <div>
-        {this.state.posts}
-        {this.state.posts.map((post, index) => {
-          return <PostCard key={index} data={post} />;
-        })}
+        {this.state.isLoaded
+          ? this.state.posts.map((post, index) => {
+              return <PostCard key={index} data={post} />;
+            })
+          : ""}
       </div>
     );
   }
