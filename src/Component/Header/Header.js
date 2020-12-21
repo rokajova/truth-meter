@@ -30,12 +30,12 @@ class Header extends Component {
   render() {
     return (
       <Navbar color="dark" expand="md">
-        <NavbarBrand href="#">Truth Meter</NavbarBrand>
+        <NavbarBrand href="/">Truth Meter</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/">New Post</NavLink>
+              <NavLink href="/new-post">New Post</NavLink>
             </NavItem>
           </Nav>
           <UncontrolledDropdown>
