@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Convert createDate timestamp seconds to string with result being YYYY/MM/DD HH:MM:SS
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
   return (

@@ -1,5 +1,6 @@
 import firebase from "firebase";
 
+//firebase config.
 const firebaseConfig = {
   apiKey: "AIzaSyCI77XJWE1N8evXTT0aI52iomKz20WJ358",
   authDomain: "truthmeter-53cd0.firebaseapp.com",

@@ -17,6 +17,7 @@ class Main extends Component {
     this.getMyPosts();
   }
 
+  // Populate posts array with firebase data, onSnapshot allows real time rendering
   getMyPosts = () => {
     db.collection("Posts").onSnapshot((docs) => {
       if (!docs.empty) {
@@ -41,9 +42,11 @@ class Main extends Component {
       }
     });
   };
+
   render() {
     return (
       <div>
+        {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
         {this.state.isLoaded
           ? this.state.posts.map((post, index) => {
               return <PostCard key={index} data={post} />;

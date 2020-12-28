@@ -30,6 +30,7 @@ class ViewPost extends Component {
     }
   }
 
+  // Convert createDate timestamp to string with result being YYYY/MM/DD HH:MM:SS
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
     return (
