@@ -29,7 +29,7 @@ const PostCard = (props) => {
         to={{ pathname: "post/" + props.data.id, state: { post: props.data } }}
       >
         <h1>{props.data.title}</h1>
-        <a href={props.data.link}>{props.data.link}</a>
+        <h3>{props.data.link}</h3>
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
       </Link>
     </div>

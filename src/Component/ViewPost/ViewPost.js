@@ -2,6 +2,9 @@ import { ReactReduxContext } from "react-redux";
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import firebase from "../../Config/firebase";
+
+const db = firebase.firestore();
 
 class ViewPost extends Component {
   constructor(props) {
@@ -13,6 +16,8 @@ class ViewPost extends Component {
     console.log(this.props);
   }
 
+  //If state is defined, populate post state with post data from this.props.location.state.post, set isLoaded to true.
+  //If state is not defined, run getPostByID function passing post id
   componentDidMount() {
     if (typeof this.props.location.state !== "undefined") {
       if (this.props.location.state.hasOwnProperty("post")) {
@@ -51,7 +56,27 @@ class ViewPost extends Component {
     );
   };
 
-  getPostByID() {}
+  // get article from Posts collection in firestore, set article state with data
+  getPostByID = (postid) => {
+    db.collection("Posts")
+      .doc(postid)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          this.setState(
+            {
+              post: doc.data(),
+            },
+            () => {
+              this.setState({
+                isLoaded: true,
+              });
+            }
+          );
+        } else {
+          this.props.history.push({ pathname: "/" });
+        }
+      });
+  };
 
   render() {
     if (this.state.isLoaded) {
