@@ -11,7 +11,11 @@ import {
   DropdownMenu,
   Collapse,
   NavbarToggler,
+  Button,
 } from "reactstrap";
+import { connect } from "react-redux";
+import firebase from "../../Config/firebase";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -38,13 +42,24 @@ class Header extends Component {
               <NavLink href="/new-post">New Post</NavLink>
             </NavItem>
           </Nav>
+          {this.props.auth.isEmpty ? "" : this.props.auth.displayName}
+          <Button onClick={() => console.log(this.props)}>P</Button>
           <UncontrolledDropdown>
             <DropdownToggle nav caret>
               Options
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem>Login</DropdownItem>
-              <DropdownItem>Logout</DropdownItem>
+              {this.props.auth.isEmpty ? (
+                <DropdownItem>
+                  <Link to={{ pathname: "/login" }}>Login</Link>
+                </DropdownItem>
+              ) : (
+                <DropdownItem>
+                  <Button onClick={() => firebase.auth().signOut()}>
+                    Logout
+                  </Button>
+                </DropdownItem>
+              )}
             </DropdownMenu>
           </UncontrolledDropdown>
         </Collapse>
@@ -53,4 +68,9 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const enhance = connect(({ firebase: { auth, profile } }) => ({
+  auth,
+  profile,
+}));
+
+export default enhance(Header);

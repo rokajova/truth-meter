@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ViewPost from "../ViewPost/ViewPost";
 import NewPost from "../NewPost/NewPost";
+import Login from "../Login/Login";
 
 import { Switch, Route } from "react-router-dom";
 
@@ -19,6 +20,9 @@ class RouterManager extends Component {
         <Switch>
           <Route path="/" exact>
             <Main />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/post/:id">
             <ViewPost />

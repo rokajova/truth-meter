@@ -18,7 +18,6 @@ class NewPost extends Component {
   }
 
   // set Post title state from the Input
-
   onChangePostTitle = (value) => {
     this.setState({
       post: {
