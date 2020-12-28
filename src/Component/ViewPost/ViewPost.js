@@ -1,5 +1,6 @@
 import { ReactReduxContext } from "react-redux";
 import React, { Component } from "react";
+import { Container } from "reactstrap";
 import { withRouter } from "react-router-dom";
 
 class ViewPost extends Component {
@@ -29,11 +30,41 @@ class ViewPost extends Component {
     }
   }
 
+  timeStampToString = (ts) => {
+    const date = new Date(ts * 1000);
+    return (
+      date.getFullYear() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getDate() +
+      " " +
+      (date.getHours() < 10 ? "0" : "") +
+      date.getHours() +
+      ":" +
+      (date.getMinutes() < 10 ? "0" : "") +
+      date.getMinutes() +
+      ":" +
+      (date.getSeconds() < 10 ? "0" : "") +
+      date.getSeconds()
+    );
+  };
+
   getPostByID() {}
 
   render() {
     if (this.state.isLoaded) {
-      return <div>{this.state.post.link}</div>;
+      return (
+        <Container>
+          <div>
+            <div>Title: {this.state.post.title}</div>
+            <div>Link: {this.state.post.link}</div>
+            <div>
+              Date: {this.timeStampToString(this.state.post.createDate.seconds)}
+            </div>
+          </div>
+        </Container>
+      );
     } else {
       return <div>Loading</div>;
     }
