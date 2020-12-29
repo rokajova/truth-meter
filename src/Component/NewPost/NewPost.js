@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Input, Button, FormGroup } from "reactstrap";
 import firebase from "../../Config/firebase";
+import { withRouter } from "react-router-dom";
 
 const db = firebase.firestore();
 
@@ -40,11 +41,11 @@ class NewPost extends Component {
   //add doc to Posts collection, then redirect to home
   submitPost() {
     const post = this.state.post;
-    post.createUserID = this.props.uid;
+    post.createUserID = this.props.auth.uid;
     db.collection("Posts")
       .add(post)
       .then((res) => {
-        console.log("Post uploaded!");
+        console.log(res);
       })
       .catch((err) => console.log(err));
     this.props.history.push("/");
@@ -75,10 +76,10 @@ class NewPost extends Component {
           />
         </FormGroup>
 
-        <Button onClick={() => console.log(this.state.post)}>Submit</Button>
+        <Button onClick={() => this.submitPost()}>Submit</Button>
       </div>
     );
   }
 }
 
-export default NewPost;
+export default withRouter(NewPost);

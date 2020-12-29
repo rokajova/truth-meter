@@ -68,13 +68,11 @@ class Header extends Component {
             <DropdownMenu right>
               {this.props.auth.isEmpty ? (
                 <DropdownItem>
-                  <a href="/login">Login</a>
+                  <Link to={{ pathname: "/login" }}>Login</Link>
                 </DropdownItem>
               ) : (
-                <DropdownItem>
-                  <Button onClick={() => firebase.auth().signOut()}>
-                    Logout
-                  </Button>
+                <DropdownItem onClick={() => firebase.auth().signOut()}>
+                  Logout
                 </DropdownItem>
               )}
             </DropdownMenu>
