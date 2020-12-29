@@ -24,15 +24,15 @@ export function timeStampToString(ts) {
 
 const PostCard = (props) => {
   return (
-    <div style={{ border: "1px solid black", margin: "10px" }}>
-      <Link
-        to={{ pathname: "post/" + props.data.id, state: { post: props.data } }}
-      >
+    <Link
+      to={{ pathname: "post/" + props.data.id, state: { post: props.data } }}
+    >
+      <div style={{ border: "1px solid black", margin: "10px" }}>
         <h1>{props.data.title}</h1>
         <h3>{props.data.link}</h3>
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

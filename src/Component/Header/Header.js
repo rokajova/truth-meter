@@ -31,6 +31,18 @@ class Header extends Component {
     });
   };
 
+  //THIS IS GOING TO BE USED FOR ADMINISTRATOR FUNCTIONS
+  // componentDidUpdate(nextProps, nextContext) {
+  //   if (!nextProps.auth.isEmpty) {
+  //     firebase
+  //       .auth()
+  //       .currentUser.getIdTokenResult()
+  //       .then((claim) => {
+  //         console.log(claim);
+  //       });
+  //   }
+  // }
+
   render() {
     return (
       <Navbar color="dark" expand="md">
@@ -42,8 +54,13 @@ class Header extends Component {
               <NavLink href="/new-post">New Post</NavLink>
             </NavItem>
           </Nav>
-          {this.props.auth.isEmpty ? "" : this.props.auth.displayName}
-          <Button onClick={() => console.log(this.props)}>P</Button>
+          {this.props.auth.isEmpty ? (
+            ""
+          ) : (
+            <div style={{ backgroundColor: "white" }}>
+              {this.props.auth.displayName}
+            </div>
+          )}
           <UncontrolledDropdown>
             <DropdownToggle nav caret>
               Options
@@ -51,7 +68,7 @@ class Header extends Component {
             <DropdownMenu right>
               {this.props.auth.isEmpty ? (
                 <DropdownItem>
-                  <Link to={{ pathname: "/login" }}>Login</Link>
+                  <a href="/login">Login</a>
                 </DropdownItem>
               ) : (
                 <DropdownItem>

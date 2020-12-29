@@ -12,7 +12,6 @@ class ViewPost extends Component {
       post: {},
       isLoaded: false,
     };
-    console.log(this.props);
   }
 
   //If state is defined, populate post state with post data from this.props.location.state.post, set isLoaded to true.
