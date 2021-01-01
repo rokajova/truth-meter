@@ -47,9 +47,10 @@ class RouterManager extends Component {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/post/:id">
-            <ViewPost />
-          </Route>
+          <Route
+            path="/post/:id"
+            component={AdminOnly(ViewPost, this.props.auth)}
+          />
           <Route
             path="/new-post"
             component={AdminOnly(NewPost, this.props.auth)}

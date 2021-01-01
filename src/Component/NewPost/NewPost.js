@@ -14,6 +14,7 @@ class NewPost extends Component {
         link: "",
         createDate: new Date(),
         createUserID: "",
+        createUserName: "",
       },
     };
   }
@@ -42,6 +43,7 @@ class NewPost extends Component {
   submitPost() {
     const post = this.state.post;
     post.createUserID = this.props.auth.uid;
+    post.createUserName = this.props.auth.displayName;
     db.collection("Posts")
       .add(post)
       .then((res) => {

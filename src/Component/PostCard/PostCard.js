@@ -31,6 +31,7 @@ const PostCard = (props) => {
         <h1>{props.data.title}</h1>
         <h3>{props.data.link}</h3>
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
+        <div>{props.data.createUserName}</div>
       </div>
     </Link>
   );

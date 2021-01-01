@@ -86,6 +86,7 @@ class ViewPost extends Component {
             <div>
               Date: {this.timeStampToString(this.state.post.createDate.seconds)}
             </div>
+            <div>Created by: {this.state.post.createUserName}</div>
           </div>
         </Container>
       );
