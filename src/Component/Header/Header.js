@@ -49,18 +49,15 @@ class Header extends Component {
         <NavbarBrand href="/">Truth Meter</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/new-post">New Post</NavLink>
-            </NavItem>
-          </Nav>
-          {this.props.auth.isEmpty ? (
-            ""
-          ) : (
-            <div style={{ backgroundColor: "white" }}>
-              {this.props.auth.displayName}
-            </div>
+          {!this.props.auth.isEmpty && (
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <NavLink href="/new-post">New Post</NavLink>
+              </NavItem>
+            </Nav>
           )}
+
+          {!this.props.auth.isEmpty && <div>{this.props.auth.displayName}</div>}
           <UncontrolledDropdown>
             <DropdownToggle nav caret>
               Options
