@@ -82,11 +82,14 @@ class ViewPost extends Component {
         <Container>
           <div>
             <div>Title: {this.state.post.title}</div>
-            <div>Link: {this.state.post.link}</div>
             <div>
               Date: {this.timeStampToString(this.state.post.createDate.seconds)}
             </div>
             <div>Created by: {this.state.post.createUserName}</div>
+            <iframe
+              src={this.state.post.link}
+              style={{ width: "100%", height: "80vh" }}
+            ></iframe>
           </div>
         </Container>
       );
