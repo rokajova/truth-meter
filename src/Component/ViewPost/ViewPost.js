@@ -88,7 +88,12 @@ class ViewPost extends Component {
             <div>Created by: {this.state.post.createUserName}</div>
             <iframe
               src={this.state.post.link}
-              style={{ width: "100%", height: "80vh" }}
+              style={{
+                width: "100%",
+                height: "80vh",
+                borderRadius: "10px",
+                border: "none",
+              }}
             ></iframe>
           </div>
         </Container>
