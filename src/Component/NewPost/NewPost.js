@@ -24,6 +24,7 @@ class NewPost extends Component {
         createDate: new Date(),
         createUserID: "",
         createUserName: "",
+        tags: [],
       },
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -39,7 +40,9 @@ class NewPost extends Component {
   }
 
   handleAddition(tag) {
-    this.setState((state) => ({ tags: [...state.tags, tag] }));
+    this.setState((state) => ({
+      tags: [...state.tags, tag],
+    }));
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -78,13 +81,14 @@ class NewPost extends Component {
     const post = this.state.post;
     post.createUserID = this.props.auth.uid;
     post.createUserName = this.props.auth.displayName;
-    db.collection("Posts")
-      .add(post)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-    this.props.history.push("/");
+    post.tags = this.state.tags;
+    // db.collection("Posts")
+    //   .add(post)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
+    // this.props.history.push("/");
   }
 
   render() {
@@ -128,15 +132,6 @@ class NewPost extends Component {
           />
         </FormGroup>
 
-        <FormGroup>
-          <Input
-            type="text"
-            name="postTags"
-            id="postTags"
-            placeholder="Enter Tags"
-          />
-        </FormGroup>
-
         <ReactTags
           tags={tags}
           handleDelete={this.handleDelete}
@@ -152,6 +147,8 @@ class NewPost extends Component {
         ) : (
           <Button disabled>Submit</Button>
         )}
+
+        <Button onClick={() => console.log(this.state.post)}>Tags</Button>
       </div>
     );
   }
