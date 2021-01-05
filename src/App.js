@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { getReduxStore, getRrfProp } from "./Config/firebase-redux";
+import Tags from "./Component/Tags";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <ReactReduxFirebaseProvider {...getRrfProp()}>
           <Router>
             <RouterManager />
+            {/* <Tags /> */}
           </Router>
         </ReactReduxFirebaseProvider>
       </Provider>
