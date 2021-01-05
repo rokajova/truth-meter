@@ -24,14 +24,14 @@ class NewPost extends Component {
   }
 
   //ReactTags function
-  onDelete(i) {
+  onTagDelete(i) {
     const tags = this.state.tags.slice(0);
     tags.splice(i, 1);
     this.setState({ tags });
   }
 
   //ReactTags function
-  onAddition(tag) {
+  onTagAddition(tag) {
     const tags = [].concat(this.state.tags, tag);
     this.setState({ tags });
   }
@@ -115,8 +115,8 @@ class NewPost extends Component {
           allowNew={true}
           ref={this.reactTags}
           tags={this.state.tags}
-          onDelete={this.onDelete.bind(this)}
-          onAddition={this.onAddition.bind(this)}
+          onDelete={this.onTagDelete.bind(this)}
+          onAddition={this.onTagAddition.bind(this)}
         />
 
         {SumbmitCondition ? (
