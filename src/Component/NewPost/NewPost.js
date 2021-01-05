@@ -35,6 +35,10 @@ class NewPost extends Component {
     const tags = [].concat(this.state.tags, tag);
     this.setState({ tags });
   }
+  //ReactTags input validate condition(must return a boolean)
+  onTagValidate() {
+    return this.state.tags.length < 4;
+  }
 
   // set Post title state from the Input
   onChangePostTitle = (value) => {
@@ -117,6 +121,7 @@ class NewPost extends Component {
           tags={this.state.tags}
           onDelete={this.onTagDelete.bind(this)}
           onAddition={this.onTagAddition.bind(this)}
+          onValidate={this.onTagValidate.bind(this)}
         />
 
         {SumbmitCondition ? (
