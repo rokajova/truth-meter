@@ -66,13 +66,13 @@ class NewPost extends Component {
     post.createUserID = this.props.auth.uid;
     post.createUserName = this.props.auth.displayName;
     post.tags = this.state.tags;
-    // db.collection("Posts")
-    //   .add(post)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
-    // this.props.history.push("/");
+    db.collection("Posts")
+      .add(post)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    this.props.history.push("/");
   }
 
   render() {
@@ -131,8 +131,6 @@ class NewPost extends Component {
         ) : (
           <Button disabled>Submit</Button>
         )}
-
-        <Button onClick={() => console.log(this.state.post)}>Tags</Button>
       </div>
     );
   }

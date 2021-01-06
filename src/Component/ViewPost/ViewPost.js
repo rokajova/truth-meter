@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import firebase from "../../Config/firebase";
 
@@ -95,6 +95,7 @@ class ViewPost extends Component {
                 border: "none",
               }}
             ></iframe>
+            <Input type="range" />
           </div>
         </Container>
       );
