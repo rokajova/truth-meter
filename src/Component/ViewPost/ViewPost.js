@@ -95,7 +95,6 @@ class ViewPost extends Component {
                 border: "none",
               }}
             ></iframe>
-            <Input type="range" />
           </div>
         </Container>
       );
