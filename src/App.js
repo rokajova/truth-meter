@@ -15,6 +15,7 @@ function App() {
           </Router>
         </ReactReduxFirebaseProvider>
       </Provider>
+      {/* Windows 10 ssd test */}
     </div>
   );
 }
