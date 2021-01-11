@@ -23,6 +23,7 @@ class NewPost extends Component {
     this.reactTags = React.createRef();
   }
 
+  
   //ReactTags function
   onTagDelete(i) {
     const tags = this.state.tags.slice(0);
