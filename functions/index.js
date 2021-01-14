@@ -9,5 +9,8 @@ exports.newUserSignup = functions.auth.user().onCreate((user) => {
     userName: user.displayName,
     userPosts: [],
     userRates: [],
+    createDate: new Date(),
+    userPhoto: user.photoURL,
+    userAbout: "",
   });
 });

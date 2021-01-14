@@ -12,18 +12,19 @@ class NewPost extends Component {
     this.state = {
       tags: [],
       post: {
-        title: "",
+        description: "",
         link: "",
         createDate: new Date(),
         createUserID: "",
         createUserName: "",
         tags: [],
+        popularScore: "",
+        totalRates: "",
       },
     };
     this.reactTags = React.createRef();
   }
 
-  
   //ReactTags function
   onTagDelete(i) {
     const tags = this.state.tags.slice(0);

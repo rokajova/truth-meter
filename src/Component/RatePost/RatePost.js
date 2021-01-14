@@ -16,7 +16,14 @@ export default class RatePost extends Component {
   }
 
   componentDidMount() {
-    console.log();
+    const userRef = db.collection("Users").doc(this.props.auth.uid);
+    this.setState({ hasLoaded: true });
+    userRef.get().then((doc) => {
+      // check if user has voted
+      if (doc.data().userRates.includes(this.props.location.state.post.id)) {
+        this.setState({ hasRated: true });
+      }
+    });
   }
 
   onSubmit = () => {
@@ -33,10 +40,7 @@ export default class RatePost extends Component {
         console.log("has this user rated? ", this.state.hasRated);
       } else {
         userRef.update({
-          userRates: [
-            ...doc.data().userRates,
-            this.props.location.state.post.id,
-          ],
+          userRates: [...doc.data().userRates, this.state.ratingScore],
         });
       }
     });
