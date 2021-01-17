@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      ratingScore: "",
+      ratingScore: 0,
     };
   }
 

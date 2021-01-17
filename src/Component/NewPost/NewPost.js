@@ -12,7 +12,7 @@ class NewPost extends Component {
     this.state = {
       tags: [],
       post: {
-        description: "",
+        title: "",
         link: "",
         createDate: new Date(),
         createUserID: "",
@@ -20,6 +20,7 @@ class NewPost extends Component {
         tags: [],
         popularScore: "",
         totalRates: "",
+        ratingScore: "",
       },
     };
     this.reactTags = React.createRef();

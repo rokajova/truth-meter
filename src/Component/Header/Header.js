@@ -74,7 +74,6 @@ class Header extends Component {
               )}
             </DropdownMenu>
           </UncontrolledDropdown>
-          <Button onClick={() => console.log(this.props.auth)}>as</Button>
         </Collapse>
       </Navbar>
     );
