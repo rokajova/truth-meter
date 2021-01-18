@@ -15,10 +15,25 @@ export default class RatePost extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const userRef = db.collection("Users").doc(this.props.auth.uid);
+
+    userRef.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({ hasLoaded: true });
+        if (doc.data().userRates.includes(this.props.location.state.post.id)) {
+          this.setState({ hasRated: true });
+          console.log("user has rates on this post!");
+        } else {
+          console.log("user has not rated on this post!");
+        }
+      }
+    });
+  }
 
   onSubmit = () => {
     // get user and post refs
+    const userRef = db.collection("Users").doc(this.props.auth.uid);
   };
 
   onChangeRateInput = (value) => {
@@ -44,6 +59,9 @@ export default class RatePost extends Component {
             Submit
           </Button>
         )}
+        <Button onClick={() => console.log(this.props.location.state.post.id)}>
+          as
+        </Button>
       </div>
     );
   }
