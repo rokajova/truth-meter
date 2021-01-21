@@ -34,6 +34,23 @@ export default class RatePost extends Component {
   onSubmit = () => {
     // get user and post refs
     const userRef = db.collection("Users").doc(this.props.auth.uid);
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+
+    return userRef.onSnapshot((doc) => {
+      if (doc.data().userRates.includes(this.props.location.state.post.id)) {
+        this.setState({ hasRated: true });
+      } else {
+        userRef.update({
+          userRates: [
+            ...doc.data().userRates,
+            this.props.location.state.post.id,
+            this.state.ratingScore,
+          ],
+        });
+      }
+    });
   };
 
   onChangeRateInput = (value) => {
@@ -43,7 +60,9 @@ export default class RatePost extends Component {
   render() {
     return (
       <div>
-        <div style={{ textAlign: "center" }}>{this.state.ratingScore}</div>
+        <div style={{ textAlign: "center" }}>
+          {this.state.ratingScore + this.props.location.state.post.id}
+        </div>
 
         <Input
           type="range"
@@ -59,9 +78,6 @@ export default class RatePost extends Component {
             Submit
           </Button>
         )}
-        <Button onClick={() => console.log(this.props.location.state.post.id)}>
-          as
-        </Button>
       </div>
     );
   }
