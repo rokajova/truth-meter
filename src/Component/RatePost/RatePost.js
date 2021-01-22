@@ -42,13 +42,21 @@ export default class RatePost extends Component {
       if (doc.data().userRates.includes(this.props.location.state.post.id)) {
         this.setState({ hasRated: true });
       } else {
-        userRef.update({
-          userRates: [
-            ...doc.data().userRates,
-            this.props.location.state.post.id,
-            this.state.ratingScore,
-          ],
-        });
+        userRef
+          .update({
+            userRates: [
+              ...doc.data().userRates,
+              this.props.location.state.post.id,
+              this.state.ratingScore,
+            ],
+          })
+          .then(() => {
+            return postRef.update({
+              rates: firebase.firestore.FieldValue.arrayUnion(
+                this.state.ratingScore
+              ),
+            });
+          });
       }
     });
   };

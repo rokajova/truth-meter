@@ -19,7 +19,7 @@ class NewPost extends Component {
         createUserName: "",
         tags: [],
         popularScore: "",
-        totalRates: "",
+        rates: [],
         ratingScore: "",
       },
     };
