@@ -39,8 +39,10 @@ export default class RatePost extends Component {
       .doc(this.props.location.state.post.id);
 
     return userRef.onSnapshot((doc) => {
+      // if user has rated the post
       if (doc.data().userRates.includes(this.props.location.state.post.id)) {
         this.setState({ hasRated: true });
+        // if user has NOT rated the post, update userRates field with post id and rating score
       } else {
         userRef
           .update({
@@ -50,6 +52,7 @@ export default class RatePost extends Component {
               this.state.ratingScore,
             ],
           })
+          // add rating score to rates field
           .then(() => {
             return postRef.update({
               rates: firebase.firestore.FieldValue.arrayUnion(
