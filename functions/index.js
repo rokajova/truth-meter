@@ -4,13 +4,17 @@ admin.initializeApp();
 
 // create a new collection in the firebase on new user create
 exports.newUserSignup = functions.auth.user().onCreate((user) => {
-  return admin.firestore().collection("Users").doc(user.uid).set({
-    userID: user.uid,
-    userName: user.displayName,
-    userPosts: [],
-    userRates: [],
-    createDate: new Date(),
-    userPhoto: user.photoURL,
-    userAbout: "",
-  });
+  return admin
+    .firestore()
+    .collection("Users")
+    .doc(user.uid)
+    .set({
+      userID: user.uid,
+      userName: user.displayName,
+      userPosts: [],
+      userRates: [{ postID: null, postRate: null }],
+      createDate: new Date(),
+      userPhoto: user.photoURL,
+      userAbout: "",
+    });
 });

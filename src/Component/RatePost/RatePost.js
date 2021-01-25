@@ -21,9 +21,13 @@ export default class RatePost extends Component {
     userRef.get().then((doc) => {
       if (doc.exists) {
         this.setState({ hasLoaded: true });
-        if (doc.data().userRates.includes(this.props.location.state.post.id)) {
+        if (
+          doc
+            .data()
+            .userRates.postID.includes(this.props.location.state.post.id)
+        ) {
           this.setState({ hasRated: true });
-          console.log("user has rates on this post!");
+          console.log("user has rated on this post!");
         } else {
           console.log("user has not rated on this post!");
         }
@@ -42,17 +46,19 @@ export default class RatePost extends Component {
       // if user has rated the post
       if (doc.data().userRates.includes(this.props.location.state.post.id)) {
         this.setState({ hasRated: true });
-        // if user has NOT rated the post, update userRates field with post id and rating score
+        // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
       } else {
         userRef
           .update({
             userRates: [
               ...doc.data().userRates,
-              this.props.location.state.post.id,
-              this.state.ratingScore,
+              {
+                postID: this.props.location.state.post.id,
+                postRate: this.state.ratingScore,
+              },
             ],
           })
-          // add rating score to rates field
+          // add rating score to rates field in Posts collection
           .then(() => {
             return postRef.update({
               rates: firebase.firestore.FieldValue.arrayUnion(
