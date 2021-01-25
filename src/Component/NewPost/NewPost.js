@@ -65,6 +65,9 @@ class NewPost extends Component {
 
   //add doc to Posts collection, then redirect to home
   submitPost() {
+    // get user reference
+    const userRef = db.collection("Users").doc(this.props.auth.uid);
+
     const post = this.state.post;
     post.createUserID = this.props.auth.uid;
     post.createUserName = this.props.auth.displayName;
@@ -72,7 +75,9 @@ class NewPost extends Component {
     db.collection("Posts")
       .add(post)
       .then((res) => {
-        console.log(res);
+        return userRef.get().then((doc) => {
+          userRef.update({ userPosts: [...doc.data().userPosts, res.id] });
+        });
       })
       .catch((err) => console.log(err));
     this.props.history.push("/");
