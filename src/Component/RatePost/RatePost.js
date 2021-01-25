@@ -17,14 +17,11 @@ export default class RatePost extends Component {
 
   componentDidMount() {
     const userRef = db.collection("Users").doc(this.props.auth.uid);
-
     userRef.get().then((doc) => {
       if (doc.exists) {
         this.setState({ hasLoaded: true });
         if (
-          doc
-            .data()
-            .userRates.postID.includes(this.props.location.state.post.id)
+          doc.data().userRatesID.includes(this.props.location.state.post.id)
         ) {
           this.setState({ hasRated: true });
           console.log("user has rated on this post!");
@@ -44,18 +41,21 @@ export default class RatePost extends Component {
 
     return userRef.onSnapshot((doc) => {
       // if user has rated the post
-      if (doc.data().userRates.includes(this.props.location.state.post.id)) {
+      if (doc.data().userRatesID.includes(this.props.location.state.post.id)) {
         this.setState({ hasRated: true });
         // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
       } else {
         userRef
           .update({
-            userRates: [
-              ...doc.data().userRates,
-              {
-                postID: this.props.location.state.post.id,
-                postRate: this.state.ratingScore,
-              },
+            userRatesID: [
+              ...doc.data().userRatesID,
+
+              this.props.location.state.post.id,
+            ],
+            userRatesScore: [
+              ...doc.data().userRatesScore,
+
+              this.state.ratingScore,
             ],
           })
           // add rating score to rates field in Posts collection
