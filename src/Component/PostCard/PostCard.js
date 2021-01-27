@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GaugeChart from "react-gauge-chart";
 
 // Convert createDate timestamp seconds to string with result being YYYY/MM/DD HH:MM:SS
 export function timeStampToString(ts) {
@@ -33,6 +34,7 @@ const PostCard = (props) => {
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
         <div>{props.data.createUserName}</div>
       </div>
+      <GaugeChart id="gauge-chart2" nrOfLevels={20} percent={0.86} />
     </Link>
   );
 };
