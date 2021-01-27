@@ -24,6 +24,7 @@ export function timeStampToString(ts) {
 }
 
 const PostCard = (props) => {
+  const chartStyle = { width: 250 };
   return (
     <Link
       to={{ pathname: "post/" + props.data.id, state: { post: props.data } }}
@@ -33,8 +34,14 @@ const PostCard = (props) => {
         <h3>{props.data.link}</h3>
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
         <div>{props.data.createUserName}</div>
+        <GaugeChart
+          id="gauge-chart2"
+          percent={0.5}
+          style={chartStyle}
+          nrOfLevels={20}
+          hideText="false"
+        />
       </div>
-      <GaugeChart id="gauge-chart2" nrOfLevels={20} percent={0.86} />
     </Link>
   );
 };
