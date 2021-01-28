@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import GaugeChart from "react-gauge-chart";
+import firebase from "../../Config/firebase";
 
+const db = firebase.firestore();
 // Convert createDate timestamp seconds to string with result being YYYY/MM/DD HH:MM:SS
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
@@ -34,9 +36,10 @@ const PostCard = (props) => {
         <h3>{props.data.link}</h3>
         <div>{timeStampToString(props.data.createDate.seconds)}</div>
         <div>{props.data.createUserName}</div>
+        <div>{props.data.rates}</div>
         <GaugeChart
           id="gauge-chart2"
-          percent={0.5}
+          percent={0.1}
           style={chartStyle}
           nrOfLevels={20}
           hideText="false"

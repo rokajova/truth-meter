@@ -81,19 +81,25 @@ export default class RatePost extends Component {
           {this.state.ratingScore + this.props.location.state.post.id}
         </div>
 
-        <Input
-          type="range"
-          min="0"
-          max="100"
-          value={this.state.ratingScore}
-          onChange={(e) => this.onChangeRateInput(e.target.value)}
-        />
         {this.state.hasRated ? (
-          <Button disabled>Submit</Button>
+          <div>
+            {" "}
+            <Input type="range" min="0" max="100" disabled />
+            <Button disabled>Submit</Button>
+          </div>
         ) : (
-          <Button color="success" onClick={() => this.onSubmit()}>
-            Submit
-          </Button>
+          <div>
+            <Input
+              type="range"
+              min="0"
+              max="100"
+              value={this.state.ratingScore}
+              onChange={(e) => this.onChangeRateInput(e.target.value)}
+            />
+            <Button color="success" onClick={() => this.onSubmit()}>
+              Submit
+            </Button>
+          </div>
         )}
       </div>
     );
