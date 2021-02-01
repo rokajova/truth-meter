@@ -39,6 +39,8 @@ export default class RatePost extends Component {
       .collection("Posts")
       .doc(this.props.location.state.post.id);
 
+    // calculate ratingScore
+
     return userRef.onSnapshot((doc) => {
       // if user has rated the post
       if (doc.data().userRatesID.includes(this.props.location.state.post.id)) {
@@ -58,6 +60,11 @@ export default class RatePost extends Component {
           .then(() => {
             return postRef.update({
               rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
+              ratingScore: this.props.location.state.post.rates.reduce(
+                (a, b) =>
+                  (parseInt(a) + parseInt(b)) /
+                  this.props.location.state.post.rates.length
+              ),
             });
           });
       }
@@ -74,7 +81,19 @@ export default class RatePost extends Component {
         <div style={{ textAlign: "center" }}>
           {this.state.rate + this.props.location.state.post.id}
         </div>
-
+        <Button
+          onClick={() =>
+            console.log(
+              this.props.location.state.post.rates.reduce(
+                (a, b) =>
+                  (parseInt(a) + parseInt(b)) /
+                  this.props.location.state.post.rates.length
+              )
+            )
+          }
+        >
+          Rating score
+        </Button>
         {this.state.hasRated ? (
           <div>
             {" "}
@@ -85,9 +104,9 @@ export default class RatePost extends Component {
           <div>
             <Input
               type="range"
+              value={this.state.rate}
               min="0"
               max="100"
-              value={this.state.rate}
               onChange={(e) => this.onChangeRateInput(e.target.value)}
             />
             <Button color="success" onClick={() => this.onSubmit()}>
