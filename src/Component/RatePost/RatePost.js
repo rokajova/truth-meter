@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      ratingScore: 0,
+      rate: 0,
     };
   }
 
@@ -52,18 +52,12 @@ export default class RatePost extends Component {
 
               this.props.location.state.post.id,
             ],
-            userRatesScore: [
-              ...doc.data().userRatesScore,
-
-              this.state.ratingScore,
-            ],
+            userRatesScore: [...doc.data().userRatesScore, this.state.rate],
           })
           // add rating score to rates field in Posts collection
           .then(() => {
             return postRef.update({
-              rates: firebase.firestore.FieldValue.arrayUnion(
-                this.state.ratingScore
-              ),
+              rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
             });
           });
       }
@@ -71,14 +65,14 @@ export default class RatePost extends Component {
   };
 
   onChangeRateInput = (value) => {
-    this.setState({ ratingScore: value });
+    this.setState({ rate: value });
   };
 
   render() {
     return (
       <div>
         <div style={{ textAlign: "center" }}>
-          {this.state.ratingScore + this.props.location.state.post.id}
+          {this.state.rate + this.props.location.state.post.id}
         </div>
 
         {this.state.hasRated ? (
@@ -93,7 +87,7 @@ export default class RatePost extends Component {
               type="range"
               min="0"
               max="100"
-              value={this.state.ratingScore}
+              value={this.state.rate}
               onChange={(e) => this.onChangeRateInput(e.target.value)}
             />
             <Button color="success" onClick={() => this.onSubmit()}>

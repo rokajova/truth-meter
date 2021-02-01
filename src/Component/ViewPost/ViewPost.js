@@ -78,8 +78,6 @@ class ViewPost extends Component {
 
   render() {
     if (this.state.isLoaded) {
-      let average = (array) => array.reduce((a, b) => a + b) / array.length;
-
       return (
         <Container>
           <div>
