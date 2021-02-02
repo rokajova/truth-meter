@@ -41,34 +41,29 @@ export default class RatePost extends Component {
 
     // calculate ratingScore
 
-    return userRef.onSnapshot((doc) => {
-      // if user has rated the post
-      if (doc.data().userRatesID.includes(this.props.location.state.post.id)) {
-        this.setState({ hasRated: true });
-        // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
-      } else {
-        userRef
-          .update({
-            userRatesID: [
-              ...doc.data().userRatesID,
+    // return userRef.onSnapshot((doc) => {
+    //   // if user has rated the post
+    //   if (doc.data().userRatesID.includes(this.props.location.state.post.id)) {
+    //     this.setState({ hasRated: true });
+    //     // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
+    //   } else {
+    //     userRef
+    //       .update({
+    //         userRatesID: [
+    //           ...doc.data().userRatesID,
 
-              this.props.location.state.post.id,
-            ],
-            userRatesScore: [...doc.data().userRatesScore, this.state.rate],
-          })
-          // add rating score to rates field in Posts collection
-          .then(() => {
-            return postRef.update({
-              rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
-              ratingScore: this.props.location.state.post.rates.reduce(
-                (a, b) =>
-                  (parseInt(a) + parseInt(b)) /
-                  this.props.location.state.post.rates.length
-              ),
-            });
-          });
-      }
-    });
+    //           this.props.location.state.post.id,
+    //         ],
+    //         userRatesScore: [...doc.data().userRatesScore, this.state.rate],
+    //       })
+    //       // add rating score to rates field in Posts collection
+    //       .then(() => {
+    //         return postRef.update({
+    //           rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
+    //         });
+    //       });
+    //   }
+    // });
   };
 
   onChangeRateInput = (value) => {
@@ -81,19 +76,7 @@ export default class RatePost extends Component {
         <div style={{ textAlign: "center" }}>
           {this.state.rate + this.props.location.state.post.id}
         </div>
-        <Button
-          onClick={() =>
-            console.log(
-              this.props.location.state.post.rates.reduce(
-                (a, b) =>
-                  (parseInt(a) + parseInt(b)) /
-                  this.props.location.state.post.rates.length
-              )
-            )
-          }
-        >
-          Rating score
-        </Button>
+
         {this.state.hasRated ? (
           <div>
             {" "}
