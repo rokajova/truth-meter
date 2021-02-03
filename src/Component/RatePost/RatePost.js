@@ -34,6 +34,16 @@ export default class RatePost extends Component {
     });
   }
 
+  getRates = () => {
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+
+    postRef.get().then((doc) => {
+      console.log("get()", doc.data().rates);
+    });
+  };
+
   onSubmit = () => {
     // get user and post refs
     const userRef = db.collection("Users").doc(this.props.auth.uid);
@@ -84,11 +94,16 @@ export default class RatePost extends Component {
           {this.state.rate + this.props.location.state.post.id}
         </div>
         <Button
-          onClick={() => console.log(this.props.location.state.post.rates)}
+          onClick={() =>
+            console.log(
+              "props.location...",
+              this.props.location.state.post.rates
+            )
+          }
         >
-          history
+          props.location.state
         </Button>
-        <Button onClick={() => console.log(this.state.rate)}>state</Button>
+        <Button onClick={() => this.getRates()}>get()</Button>
 
         {this.state.hasRated ? (
           <div>
