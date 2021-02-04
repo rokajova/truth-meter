@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      rate: 0,
+      rate: "0",
       // array with ratevalues from firebase
       rates: [],
     };
@@ -61,22 +61,6 @@ export default class RatePost extends Component {
         this.setState({ hasRated: true });
         // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
       } else {
-        postRef.get().then((doc) => {
-          postRef.update(
-            {
-              rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
-            },
-            function () {
-              const sum = doc
-                .data()
-                .rates.reduce((a, b) => parseInt(a) + parseInt(b));
-              postRef.update({
-                ratingScore: sum / doc.data().rates.length,
-              });
-            }
-          );
-        });
-
         userRef.update({
           userRatesID: [
             ...doc.data().userRatesID,
@@ -86,6 +70,9 @@ export default class RatePost extends Component {
           userRatesScore: [...doc.data().userRatesScore, this.state.rate],
         });
       }
+      postRef.update({
+        rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
+      });
     });
   };
 
