@@ -40,7 +40,11 @@ export default class RatePost extends Component {
       .doc(this.props.location.state.post.id);
 
     postRef.get().then((doc) => {
-      console.log("get()", doc.data().rates);
+      const sum = doc
+        .data()
+        .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+
+      console.log(sum / doc.data().rates.length);
     });
   };
 
@@ -57,28 +61,30 @@ export default class RatePost extends Component {
         this.setState({ hasRated: true });
         // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
       } else {
-        postRef.update({
-          rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
+        postRef.get().then((doc) => {
+          postRef.update(
+            {
+              rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
+            },
+            function () {
+              const sum = doc
+                .data()
+                .rates.reduce((a, b) => parseInt(a) + parseInt(b));
+              postRef.update({
+                ratingScore: sum / doc.data().rates.length,
+              });
+            }
+          );
         });
 
-        userRef
-          .update({
-            userRatesID: [
-              ...doc.data().userRatesID,
+        userRef.update({
+          userRatesID: [
+            ...doc.data().userRatesID,
 
-              this.props.location.state.post.id,
-            ],
-            userRatesScore: [...doc.data().userRatesScore, this.state.rate],
-          })
-          .then(() => {
-            return postRef.update({
-              ratingScore: this.props.location.state.post.rates.reduce(
-                (a, b) =>
-                  (parseInt(a) + parseInt(b)) /
-                  this.props.location.state.post.rates.length
-              ),
-            });
-          });
+            this.props.location.state.post.id,
+          ],
+          userRatesScore: [...doc.data().userRatesScore, this.state.rate],
+        });
       }
     });
   };
@@ -93,17 +99,7 @@ export default class RatePost extends Component {
         <div style={{ textAlign: "center" }}>
           {this.state.rate + this.props.location.state.post.id}
         </div>
-        <Button
-          onClick={() =>
-            console.log(
-              "props.location...",
-              this.props.location.state.post.rates
-            )
-          }
-        >
-          props.location.state
-        </Button>
-        <Button onClick={() => this.getRates()}>get()</Button>
+        <button onClick={() => this.getRates()}>asd</button>
 
         {this.state.hasRated ? (
           <div>
