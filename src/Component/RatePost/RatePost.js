@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      rate: "0",
+      rate: "",
       // array with ratevalues from firebase
       rates: [],
     };
@@ -43,17 +43,42 @@ export default class RatePost extends Component {
       const sum = doc
         .data()
         .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+      const array = doc.data().rates;
+      array.push(this.state.rate);
 
-      console.log(sum / doc.data().rates.length);
+      console.log(sum);
+    });
+  };
+
+  updatePosts = () => {
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+
+    return postRef.get().then((doc) => {
+      postRef.update(
+        {
+          rates: [...doc.data().rates, this.state.rate],
+        },
+        (error) => {
+          if (error) {
+            alert("Error!" + error);
+          } else {
+            const sum = doc
+              .data()
+              .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            postRef.update({
+              ratingScore: sum / doc.data().rates.length,
+            });
+          }
+        }
+      );
     });
   };
 
   onSubmit = () => {
     // get user and post refs
     const userRef = db.collection("Users").doc(this.props.auth.uid);
-    const postRef = db
-      .collection("Posts")
-      .doc(this.props.location.state.post.id);
 
     return userRef.onSnapshot((doc) => {
       // if user has rated the post
@@ -69,10 +94,8 @@ export default class RatePost extends Component {
           ],
           userRatesScore: [...doc.data().userRatesScore, this.state.rate],
         });
+        this.updatePosts();
       }
-      postRef.update({
-        rates: firebase.firestore.FieldValue.arrayUnion(this.state.rate),
-      });
     });
   };
 
