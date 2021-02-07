@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      rate: "",
+      rate: "20",
       // array with ratevalues from firebase
       rates: [],
     };
@@ -34,45 +34,29 @@ export default class RatePost extends Component {
     });
   }
 
-  getRates = () => {
+  updatePosts = async () => {
     const postRef = db
       .collection("Posts")
       .doc(this.props.location.state.post.id);
 
-    postRef.get().then((doc) => {
-      const sum = doc
-        .data()
-        .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-      const array = doc.data().rates;
-      array.push(this.state.rate);
-
-      console.log(sum);
+    const doc = await postRef.get();
+    await postRef.update({
+      rates: [...doc.data().rates, this.state.rate],
     });
+    this.blah();
   };
 
-  updatePosts = () => {
+  blah = async () => {
     const postRef = db
       .collection("Posts")
       .doc(this.props.location.state.post.id);
+    const doc = await postRef.get();
+    const ratingScoreSum = doc
+      .data()
+      .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
 
-    return postRef.get().then((doc) => {
-      postRef.update(
-        {
-          rates: [...doc.data().rates, this.state.rate],
-        },
-        (error) => {
-          if (error) {
-            alert("Error!" + error);
-          } else {
-            const sum = doc
-              .data()
-              .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-            postRef.update({
-              ratingScore: sum / doc.data().rates.length,
-            });
-          }
-        }
-      );
+    await postRef.update({
+      ratingScore: ratingScoreSum / doc.data().rates.length,
     });
   };
 
@@ -109,7 +93,8 @@ export default class RatePost extends Component {
         <div style={{ textAlign: "center" }}>
           {this.state.rate + this.props.location.state.post.id}
         </div>
-        <button onClick={() => this.getRates()}>asd</button>
+        <button onClick={() => this.updatePosts()}>update</button>
+        <button onClick={() => this.blah()}>check</button>
 
         {this.state.hasRated ? (
           <div>
