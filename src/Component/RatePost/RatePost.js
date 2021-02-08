@@ -11,7 +11,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
-      rate: "20",
+      rate: "",
       // array with ratevalues from firebase
       rates: [],
     };
@@ -34,34 +34,22 @@ export default class RatePost extends Component {
     });
   }
 
-  updatePosts = async () => {
+  updatePostsCol = async () => {
+    // get post ref
     const postRef = db
       .collection("Posts")
       .doc(this.props.location.state.post.id);
 
     const doc = await postRef.get();
+    // add rate to rates array
     await postRef.update({
       rates: [...doc.data().rates, this.state.rate],
     });
-    this.blah();
+    this.updateRatingScore();
   };
 
-  blah = async () => {
-    const postRef = db
-      .collection("Posts")
-      .doc(this.props.location.state.post.id);
-    const doc = await postRef.get();
-    const ratingScoreSum = doc
-      .data()
-      .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-
-    await postRef.update({
-      ratingScore: ratingScoreSum / doc.data().rates.length,
-    });
-  };
-
-  onSubmit = () => {
-    // get user and post refs
+  updateUsersCol = () => {
+    // get user ref
     const userRef = db.collection("Users").doc(this.props.auth.uid);
 
     return userRef.onSnapshot((doc) => {
@@ -78,9 +66,31 @@ export default class RatePost extends Component {
           ],
           userRatesScore: [...doc.data().userRatesScore, this.state.rate],
         });
-        this.updatePosts();
       }
     });
+  };
+
+  updateRatingScore = async () => {
+    // get post ref
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+
+    const doc = await postRef.get();
+    // calculate the sum of rates array
+    const ratingScoreSum = doc
+      .data()
+      .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+    // update ratingScore with rates array average
+    await postRef.update({
+      ratingScore: ratingScoreSum / doc.data().rates.length,
+    });
+  };
+
+  onSubmit = () => {
+    // submit rate to firebase with all the necessary updates
+    this.updateUsersCol();
+    this.updatePostsCol();
   };
 
   onChangeRateInput = (value) => {
@@ -93,8 +103,6 @@ export default class RatePost extends Component {
         <div style={{ textAlign: "center" }}>
           {this.state.rate + this.props.location.state.post.id}
         </div>
-        <button onClick={() => this.updatePosts()}>update</button>
-        <button onClick={() => this.blah()}>check</button>
 
         {this.state.hasRated ? (
           <div>

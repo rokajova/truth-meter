@@ -27,7 +27,7 @@ export function timeStampToString(ts) {
 
 const PostCard = (props) => {
   // gauge style
-  const chartStyle = { width: 250 };
+  const chartStyle = { width: 400 };
 
   return (
     <Link
@@ -41,10 +41,10 @@ const PostCard = (props) => {
         <div>Rates: {props.data.rates}</div>
         <GaugeChart
           id="gauge-chart2"
-          percent={0.1}
+          percent={1}
           style={chartStyle}
           nrOfLevels={20}
-          hideText="false"
+          hideText="true"
         />
       </div>
     </Link>
