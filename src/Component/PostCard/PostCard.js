@@ -40,11 +40,13 @@ const PostCard = (props) => {
         <div>{props.data.createUserName}</div>
         <div>Rates: {props.data.rates}</div>
         <GaugeChart
-          id="gauge-chart2"
-          percent={1}
           style={chartStyle}
-          nrOfLevels={20}
-          hideText="true"
+          textColor="black"
+          id="gauge-chart6"
+          animate={false}
+          nrOfLevels={15}
+          percent={props.data.ratingScore / 100}
+          needleColor="#345243"
         />
       </div>
     </Link>
