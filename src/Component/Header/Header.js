@@ -68,9 +68,12 @@ class Header extends Component {
                   <Link to={{ pathname: "/login" }}>Login</Link>
                 </DropdownItem>
               ) : (
-                <DropdownItem onClick={() => firebase.auth().signOut()}>
-                  Logout
-                </DropdownItem>
+                <div>
+                  <DropdownItem onClick={() => firebase.auth().signOut()}>
+                    Logout
+                  </DropdownItem>
+                  <DropdownItem href="/profile">My Profile</DropdownItem>
+                </div>
               )}
             </DropdownMenu>
           </UncontrolledDropdown>

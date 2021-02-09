@@ -6,6 +6,7 @@ import ViewPost from "../ViewPost/ViewPost";
 import NewPost from "../NewPost/NewPost";
 import Login from "../Login/Login";
 import RatePost from "../RatePost/RatePost";
+import Profile from "../Profile/Profile";
 
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -48,6 +49,11 @@ class RouterManager extends Component {
           <Route path="/login">
             <Login />
           </Route>
+          <Route
+            path="/profile"
+            component={AdminOnly(Profile, this.props.auth)}
+          />
+
           <Route path="/post/:id">
             <Route
               path="/post/:id"

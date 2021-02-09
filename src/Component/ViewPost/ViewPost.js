@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import GaugeChart from "react-gauge-chart";
 import firebase from "../../Config/firebase";
 
 const db = firebase.firestore();
@@ -78,6 +79,7 @@ class ViewPost extends Component {
 
   render() {
     if (this.state.isLoaded) {
+      const gaugeStyle = { width: 400 };
       return (
         <Container>
           <div>
@@ -86,6 +88,15 @@ class ViewPost extends Component {
               Date: {this.timeStampToString(this.state.post.createDate.seconds)}
             </div>
             <div>Created by: {this.state.post.createUserName}</div>
+            <GaugeChart
+              id="gauge-chart6"
+              style={gaugeStyle}
+              animate={false}
+              textColor="black"
+              nrOfLevels={15}
+              percent={this.state.post.ratingScore / 100}
+              needleColor="#345243"
+            />
             <iframe
               src={this.state.post.link}
               style={{

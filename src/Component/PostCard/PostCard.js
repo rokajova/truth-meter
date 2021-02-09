@@ -36,9 +36,11 @@ const PostCard = (props) => {
       <div style={{ border: "1px solid black", margin: "10px" }}>
         <h1>{props.data.title}</h1>
         <h3>{props.data.link}</h3>
-        <div>{timeStampToString(props.data.createDate.seconds)}</div>
-        <div>{props.data.createUserName}</div>
-        <div>Rates: {props.data.rates}</div>
+        <div>
+          Create Date : {timeStampToString(props.data.createDate.seconds)}
+        </div>
+        <div>Posted By: {props.data.createUserName}</div>
+        <div>RatingScore: {props.data.ratingScore} %</div>
         <GaugeChart
           style={chartStyle}
           textColor="black"
