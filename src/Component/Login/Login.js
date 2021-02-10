@@ -13,8 +13,33 @@ const uiConfig = {
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      user: "",
+      email: "",
+      password: "",
+      emailError: "",
+      passwordError: "",
+      hasAccount: false,
+    };
   }
+
+  handleLogin = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+            this.setState({ emailError: err.message });
+            break;
+          case "auth/wrong-password":
+            this.setState({ passwordError: err.message });
+            break;
+        }
+      });
+  };
 
   render() {
     return (

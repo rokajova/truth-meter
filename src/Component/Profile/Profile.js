@@ -27,7 +27,7 @@ class Profile extends Component {
         {" "}
         Posts by user: {this.state.userData.userPosts}
         <br />
-        Rates by user: {this.state.userData.userRatesID},
+        Rates by user: {this.state.userData.userRatesID}
         {this.state.userData.userRatesScore}
       </div>
     );
