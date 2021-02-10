@@ -41,6 +41,33 @@ class Login extends Component {
       });
   };
 
+  handleSignUp = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            this.setState({ emailError: err.message });
+            break;
+          case "auth/weak-password":
+            this.setState({ passwordError: err.message });
+            break;
+        }
+      });
+  };
+
+  authListener = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user: user });
+      } else {
+        this.setState({ user: "" });
+      }
+    });
+  };
+
   render() {
     return (
       <Container>
