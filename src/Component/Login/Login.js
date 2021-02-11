@@ -1,88 +1,129 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../Config/firebase";
 
-const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: "/",
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-};
+const Login = () => {
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [hasAccount, setHasAccount] = useState(false);
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: "",
-      email: "",
-      password: "",
-      emailError: "",
-      passwordError: "",
-      hasAccount: false,
-    };
-  }
+  // for google auth
+  const uiConfig = {
+    signInFlow: "popup",
+    signInSuccessUrl: "/",
+    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+  };
 
-  handleLogin = () => {
+  const clearInputs = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  const clearErrors = () => {
+    setEmailError("");
+    setPasswordError("");
+  };
+
+  const handleLogin = () => {
+    clearErrors();
     firebase
       .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .signInWithEmailAndPassword(email, password)
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
           case "auth/user-disabled":
           case "auth/user-not-found":
-            this.setState({ emailError: err.message });
+            setEmailError(err.message);
             break;
           case "auth/wrong-password":
-            this.setState({ passwordError: err.message });
+            setPasswordError(err.message);
             break;
         }
       });
   };
 
-  handleSignUp = () => {
+  const handleSignup = () => {
+    clearErrors();
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .createUserWithEmailAndPassword(email, password)
       .catch((err) => {
         switch (err.code) {
           case "auth/email-already-in-use":
           case "auth/invalid-email":
-            this.setState({ emailError: err.message });
+            setEmailError(err.message);
             break;
           case "auth/weak-password":
-            this.setState({ passwordError: err.message });
+            setPasswordError(err.message);
             break;
         }
       });
   };
 
-  authListener = () => {
+  const handleLogout = () => {
+    firebase.auth().signOut();
+  };
+
+  const authListener = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user: user });
+        clearInputs();
+        setUser(user);
       } else {
-        this.setState({ user: "" });
+        setUser("");
       }
     });
   };
 
-  render() {
-    return (
-      <Container>
-        <Row>
-          <Col>
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+  useEffect(() => {
+    authListener();
+  }, []);
+
+  return (
+    <div>
+      <label>UserName</label>
+      <input
+        type="text"
+        autoFocus
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <p>{emailError}</p>
+      <label>Password</label>
+      <input
+        type="password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <p>{passwordError}</p>
+      {hasAccount ? (
+        <div>
+          <button onClick={handleLogin}>Sign In</button>
+          <p>
+            Don't have an account?
+            <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
+          </p>
+        </div>
+      ) : (
+        <div>
+          <button onClick={handleSignup}>Sign Up</button>
+          <p>
+            Have an account?
+            <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const enhance = connect(({ firebase: { auth, profile } }) => ({
   auth,
