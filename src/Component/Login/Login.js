@@ -87,6 +87,7 @@ const Login = () => {
 
   return (
     <div>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
       <label>UserName</label>
       <input
         type="text"
