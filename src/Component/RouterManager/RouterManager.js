@@ -11,6 +11,7 @@ import Profile from "../Profile/Profile";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+// admin function
 const AdminOnly = (ComposedComponent, auth) => {
   class AdminOnly extends Component {
     constructor(props) {

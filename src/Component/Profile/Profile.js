@@ -13,6 +13,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    // populate userData array with user data from firebase on first render
     const userRef = db.collection("Users").doc(this.props.auth.uid);
     userRef.get().then((doc) => {
       if (doc.exists) {

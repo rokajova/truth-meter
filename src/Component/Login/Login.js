@@ -5,6 +5,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../Config/firebase";
 
 const Login = () => {
+  // required states for authentication
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,23 +13,27 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
 
-  // for google auth
+  // config for google authentication
   const uiConfig = {
     signInFlow: "popup",
     signInSuccessUrl: "/",
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
   };
 
+  // clears login and signin state
   const clearInputs = () => {
     setEmail("");
     setPassword("");
   };
 
+  // clears errors state
   const clearErrors = () => {
     setEmailError("");
     setPasswordError("");
   };
 
+  // signs in with existing user if there are no errors described in the switch statement
+  // if there are errors, set state with the corresponding error
   const handleLogin = () => {
     clearErrors();
     firebase
@@ -48,6 +53,8 @@ const Login = () => {
       });
   };
 
+  // signs up a new user if there are no errors described in the switch statement
+  // if there are errors, set state with the corresponding error
   const handleSignup = () => {
     clearErrors();
     firebase
@@ -66,10 +73,12 @@ const Login = () => {
       });
   };
 
-  const handleLogout = () => {
-    firebase.auth().signOut();
-  };
+  // sign out user, this is being used in the Header
+  // const handleLogout = () => {
+  //   firebase.auth().signOut();
+  // };
 
+  // checks for auth state changes, set state accordingly
   const authListener = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -81,6 +90,7 @@ const Login = () => {
     });
   };
 
+  // this hook is ran on every render
   useEffect(() => {
     authListener();
   }, []);

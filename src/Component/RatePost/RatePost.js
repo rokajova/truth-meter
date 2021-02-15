@@ -17,6 +17,7 @@ export default class RatePost extends Component {
     };
   }
 
+  // check if the user has rated on the post on first render, set state accordingly
   componentDidMount() {
     const userRef = db.collection("Users").doc(this.props.auth.uid);
     userRef.get().then((doc) => {
@@ -34,20 +35,33 @@ export default class RatePost extends Component {
     });
   }
 
-  updatePostsCol = async () => {
+  updateRatingScore = async () => {
     // get post ref
     const postRef = db
       .collection("Posts")
       .doc(this.props.location.state.post.id);
 
     const doc = await postRef.get();
-    // add rate to rates array
+    // calculate the sum of rates array
+    const ratingScoreSum = doc
+      .data()
+      .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+    // update ratingScore with rates array average
+    await postRef.update({
+      ratingScore: ratingScoreSum / doc.data().rates.length,
+    });
+  };
+  updatePostsCol = async () => {
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+    // add current rate to the rates array in the Posts doc
+    const doc = await postRef.get();
     await postRef.update({
       rates: [...doc.data().rates, this.state.rate],
     });
     this.updateRatingScore();
   };
-
   updateUsersCol = () => {
     // get user ref
     const userRef = db.collection("Users").doc(this.props.auth.uid);
@@ -70,29 +84,13 @@ export default class RatePost extends Component {
     });
   };
 
-  updateRatingScore = async () => {
-    // get post ref
-    const postRef = db
-      .collection("Posts")
-      .doc(this.props.location.state.post.id);
-
-    const doc = await postRef.get();
-    // calculate the sum of rates array
-    const ratingScoreSum = doc
-      .data()
-      .rates.reduce((a, b) => parseInt(a) + parseInt(b), 0);
-    // update ratingScore with rates array average
-    await postRef.update({
-      ratingScore: ratingScoreSum / doc.data().rates.length,
-    });
-  };
-
+  // submit rate to firebase with all the necessary updates
   onSubmit = () => {
-    // submit rate to firebase with all the necessary updates
     this.updateUsersCol();
     this.updatePostsCol();
   };
 
+  // change rate state to what the rate sliders value is
   onChangeRateInput = (value) => {
     this.setState({ rate: value });
   };
