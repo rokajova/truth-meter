@@ -97,43 +97,51 @@ const Login = () => {
   }, []);
 
   return (
-    <div>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-      <label>UserName</label>
-      <input
-        type="text"
-        autoFocus
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <p>{emailError}</p>
-      <label>Password</label>
-      <input
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <p>{passwordError}</p>
-      {hasAccount ? (
-        <div>
-          <button onClick={handleLogin}>Sign In</button>
-          <p>
-            Don't have an account?
-            <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
-          </p>
+    <section className={classes.login}>
+      <div className={classes.loginContainer}>
+        <label>UserName</label>
+        <input
+          type="text"
+          autoFocus
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <p className={classes.errorMsg}>{emailError}</p>
+        <label>Password</label>
+        <input
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className={classes.errorMsg}>{passwordError}</p>
+        <div className={classes.btnContainer}>
+          {" "}
+          {hasAccount ? (
+            <div>
+              <button onClick={handleLogin}>Sign In</button>
+              <p>
+                Don't have an account?
+                <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
+              </p>
+            </div>
+          ) : (
+            <div>
+              <button onClick={handleSignup}>Sign Up</button>
+              <p>
+                Have an account?
+                <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span>
+              </p>
+            </div>
+          )}{" "}
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
         </div>
-      ) : (
-        <div>
-          <button onClick={handleSignup}>Sign Up</button>
-          <p>
-            Have an account?
-            <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span>
-          </p>
-        </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 };
 
