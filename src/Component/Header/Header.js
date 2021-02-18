@@ -16,6 +16,7 @@ import {
 import { connect } from "react-redux";
 import firebase from "../../Config/firebase";
 import { Link } from "react-router-dom";
+import classes from "./Header.module.css";
 
 class Header extends Component {
   constructor(props) {

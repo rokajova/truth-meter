@@ -120,7 +120,9 @@ const Login = () => {
           {" "}
           {hasAccount ? (
             <div>
-              <button onClick={handleLogin}>Sign In</button>
+              <button className={classes.button} onClick={handleLogin}>
+                Sign In
+              </button>
               <p>
                 Don't have an account?
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
@@ -128,7 +130,9 @@ const Login = () => {
             </div>
           ) : (
             <div>
-              <button onClick={handleSignup}>Sign Up</button>
+              <button className={classes.button} onClick={handleSignup}>
+                Sign Up
+              </button>
               <p>
                 Have an account?
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span>
