@@ -81,7 +81,7 @@ class Header extends Component {
       //   </Collapse>
       // </Navbar>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-white" href="#">
+        <a className="navbar-brand text-white" href="/">
           Truthmeter
         </a>
         <button
@@ -98,15 +98,76 @@ class Header extends Component {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto">
+            {!this.props.auth.isEmpty && (
+              <li className="nav-item active">
+                <a
+                  className="nav-link text-white text-uppercase "
+                  href="/new-post"
+                >
+                  New Post&nbsp;<i class="fas fa-plus"></i>{" "}
+                  <span className="sr-only">(current)</span>
+                </a>
+              </li>
+            )}
+            {this.props.auth.isEmpty ? (
+              <li className="nav-item">
+                <a
+                  className="nav-link text-white text-uppercase "
+                  href="/login"
+                >
+                  Log in/ Sign Up&nbsp;<i class="fas fa-user"></i>
+                </a>
+              </li>
+            ) : (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Dropdown link
+                </a>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a className="dropdown-item" href="#">
+                    Action
+                  </a>
+                  <a className="dropdown-item" href="#">
+                    Another action
+                  </a>
+                  <a className="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </div>
+              </li>
+              // <div>
+              //   <li className="nav-item">
+              //     <a
+              //       className="nav-link text-white text-uppercase "
+              //       href="/profile"
+              //     >
+              //       My profile&nbsp;<i class="fas fa-user"></i>
+              //     </a>
+              //   </li>
+              //   <li className="nav-item">
+              //     <a
+              //       className="nav-link text-white text-uppercase"
+              //       onClick={() => firebase.auth().signOut()}
+              //     >
+              //       Logout&nbsp;<i class="fas fa-minus"></i>
+              //     </a>
+              //   </li>
+              // </div>
+            )}
             <li className="nav-item active">
-              <a className="nav-link text-white text-uppercase ml-5" href="#">
+              <a className="nav-link text-white text-uppercase " href="#">
                 info&nbsp;<i class="fas fa-info"></i>{" "}
                 <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-white text-uppercase ml-5" href="#">
-                user&nbsp;<i class="fas fa-user"></i>
               </a>
             </li>
           </ul>
