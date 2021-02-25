@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../Config/firebase";
