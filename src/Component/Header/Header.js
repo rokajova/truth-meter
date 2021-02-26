@@ -40,56 +40,28 @@ class Header extends Component {
 
   render() {
     return (
-      // <Navbar color="dark" expand="md">
-      //   <NavbarBrand href="/">Truth Meter</NavbarBrand>
-      //   <NavbarToggler onClick={this.toggle} />
-      //   <Collapse isOpen={this.state.isOpen} navbar>
-      //     {!this.props.auth.isEmpty && (
-      //       <Nav className="mr-auto" navbar>
-      //         <NavItem>
-      //           <NavLink href="/new-post">New Post</NavLink>
-      //         </NavItem>
-      //       </Nav>
-      //     )}
+      <Navbar bg="dark" expand="lg">
+        <Navbar.Brand href="/" className="text-white">
+          TruthMeter
+        </Navbar.Brand>
 
-      //     {!this.props.auth.isEmpty && <div>{this.props.auth.displayName}</div>}
-      //     <UncontrolledDropdown>
-      //       <DropdownToggle nav caret>
-      //         Options
-      //       </DropdownToggle>
-      //       <DropdownMenu right>
-      //         {this.props.auth.isEmpty ? (
-      //           <DropdownItem>
-      //             <Link to={{ pathname: "/login" }}>Login</Link>
-      //           </DropdownItem>
-      //         ) : (
-      //           <div>
-      //             <DropdownItem onClick={() => firebase.auth().signOut()}>
-      //               Logout
-      //             </DropdownItem>
-      //             <DropdownItem href="/profile">My Profile</DropdownItem>
-      //           </div>
-      //         )}
-      //       </DropdownMenu>
-      //     </UncontrolledDropdown>
-      //   </Collapse>
-      // </Navbar>
-      <Navbar bg="light" expand="md">
-        <Navbar.Brand href="/">TruthMeter</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="enter a tag"
+            className="mr-sm-3"
+          />
+        </Form>
+        <Navbar.Toggle className="ml-auto" aria-controls="basic-navbar-nav" />
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Form inline>
-            <i className="fas fa-search mr-1" />
-            <FormControl type="text" className="mr-sm-2" />
-          </Form>
           {this.props.auth.isEmpty ? (
             <Nav className="ml-auto ">
-              <Nav.Link href="#">
-                &nbsp; <i className="fas fa-info" /> INFO
-              </Nav.Link>
               <Nav.Link href="/login">
                 &nbsp; <i className="fas fa-user" /> LOG IN/SIGN UP
+              </Nav.Link>
+              <Nav.Link href="#">
+                &nbsp; <i className="fas fa-info" /> INFO
               </Nav.Link>
             </Nav>
           ) : (
@@ -99,18 +71,25 @@ class Header extends Component {
                 &nbsp; <i className="fas fa-plus" />
                 NEW POST
               </Nav.Link>
-              <NavDropdown title="USER" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">My profile</NavDropdown.Item>
-
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={() => {
-                    firebase.auth().signOut();
-                  }}
-                >
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link>
+                {" "}
+                &nbsp; <i className="fas fa-info" />
+                INFO
+              </Nav.Link>
+              <Nav.Link href="/profile">
+                {" "}
+                &nbsp; <i className="fas fa-user" />
+                PROFILE
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  firebase.auth().signOut();
+                }}
+              >
+                {" "}
+                &nbsp; <i className="fas fa-minus" />
+                LOG OUT
+              </Nav.Link>
             </Nav>
           )}
         </Navbar.Collapse>
