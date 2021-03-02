@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, Input } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import GaugeChart from "react-gauge-chart";
 import firebase from "../../Config/firebase";
@@ -81,33 +80,31 @@ class ViewPost extends Component {
     if (this.state.isLoaded) {
       const gaugeStyle = { width: 400 };
       return (
-        <Container>
+        <div>
+          <div>Title: {this.state.post.title}</div>
           <div>
-            <div>Title: {this.state.post.title}</div>
-            <div>
-              Date: {this.timeStampToString(this.state.post.createDate.seconds)}
-            </div>
-            <div>Created by: {this.state.post.createUserName}</div>
-            <GaugeChart
-              id="gauge-chart6"
-              style={gaugeStyle}
-              animate={false}
-              textColor="black"
-              nrOfLevels={15}
-              percent={this.state.post.ratingScore / 100}
-              needleColor="#345243"
-            />
-            <iframe
-              src={this.state.post.link}
-              style={{
-                width: "100%",
-                height: "80vh",
-                borderRadius: "10px",
-                border: "none",
-              }}
-            ></iframe>
+            Date: {this.timeStampToString(this.state.post.createDate.seconds)}
           </div>
-        </Container>
+          <div>Created by: {this.state.post.createUserName}</div>
+          <GaugeChart
+            id="gauge-chart6"
+            style={gaugeStyle}
+            animate={false}
+            textColor="black"
+            nrOfLevels={15}
+            percent={this.state.post.ratingScore / 100}
+            needleColor="#345243"
+          />
+          <iframe
+            src={this.state.post.link}
+            style={{
+              width: "100%",
+              height: "80vh",
+              borderRadius: "10px",
+              border: "none",
+            }}
+          ></iframe>
+        </div>
       );
     } else {
       return <div>Loading</div>;

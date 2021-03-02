@@ -36,9 +36,12 @@ const PostCard = (props) => {
     >
       <Container className={classes.PostCardContainer}>
         <Row>
-          <Col sm={8}>{props.data.link}</Col>
-          <Col sm={4}>
+          <Col className="my-auto" sm={10}>
+            {props.data.link}
+          </Col>
+          <Col className="ml-auto" sm={2}>
             <GaugeChart
+              style={{ maxWidth: "150px" }}
               textColor="black"
               id="gauge-chart6"
               animate={false}
