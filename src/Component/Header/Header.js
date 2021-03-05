@@ -41,9 +41,10 @@ class Header extends Component {
   render() {
     return (
       <Navbar bg="dark" expand="lg">
-        <Navbar.Brand href="/" className="text-white">
-          TruthMeter
-        </Navbar.Brand>
+        <Link to={{ pathname: "/" }}>
+          {" "}
+          <Navbar.Brand className="text-white">TruthMeter</Navbar.Brand>
+        </Link>
 
         <Form inline>
           <FormControl
@@ -57,29 +58,37 @@ class Header extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           {this.props.auth.isEmpty ? (
             <Nav className="ml-auto ">
-              <Nav.Link href="/login">
-                &nbsp; <i className="fas fa-user" /> LOG IN/SIGN UP
+              <Nav.Link>
+                <Link to="/login">
+                  {" "}
+                  &nbsp; <i className="fas fa-user" /> LOG IN/SIGN UP
+                </Link>
               </Nav.Link>
-              <Nav.Link href="#">
+
+              <Nav.Link>
                 &nbsp; <i className="fas fa-info" /> INFO
               </Nav.Link>
             </Nav>
           ) : (
             <Nav className="ml-auto">
-              <Nav.Link href="/new-post">
-                {" "}
-                &nbsp; <i className="fas fa-plus" />
-                NEW POST
+              <Nav.Link>
+                <Link to="/new-post">
+                  {" "}
+                  &nbsp; <i className="fas fa-plus" />
+                  NEW POST
+                </Link>
               </Nav.Link>
               <Nav.Link>
                 {" "}
                 &nbsp; <i className="fas fa-info" />
                 INFO
               </Nav.Link>
-              <Nav.Link href="/profile">
-                {" "}
-                &nbsp; <i className="fas fa-user" />
-                PROFILE
+              <Nav.Link>
+                <Link to="/profile">
+                  {" "}
+                  &nbsp; <i className="fas fa-user" />
+                  PROFILE
+                </Link>
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
