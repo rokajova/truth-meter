@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button } from "reactstrap";
+import { Form, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 
 const db = firebase.firestore();
@@ -104,19 +104,24 @@ export default class RatePost extends Component {
 
         {this.state.hasRated ? (
           <div>
-            {" "}
-            <Input type="range" min="0" max="100" disabled />
+            <p>You have already rated this post</p>
             <Button disabled>Submit</Button>
           </div>
         ) : (
           <div>
-            <Input
-              type="range"
-              value={this.state.rate}
-              min="0"
-              max="100"
-              onChange={(e) => this.onChangeRateInput(e.target.value)}
-            />
+            <Form>
+              <Form.Group controlId="formBasicRange">
+                <Form.Label>Range</Form.Label>
+                <Form.Control
+                  type="range"
+                  value={this.state.rate}
+                  min="0"
+                  max="100"
+                  onChange={(e) => this.onChangeRateInput(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+
             <Button color="success" onClick={() => this.onSubmit()}>
               Submit
             </Button>

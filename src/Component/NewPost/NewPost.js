@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, Input, Button, FormGroup } from "reactstrap";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
 import ReactTags from "react-tag-autocomplete";
@@ -101,27 +101,25 @@ class NewPost extends Component {
 
     return (
       <div>
-        <FormGroup>
-          <Input
-            type="text"
-            name="postTitle"
-            id="postTitle"
+        <InputGroup className="mb-3">
+          <FormControl
             placeholder="Enter Title"
+            aria-label="Enter Title"
+            aria-describedby="basic-addon1"
             onChange={(e) => this.onChangePostTitle(e.target.value)}
             value={this.state.post.title}
           />
-        </FormGroup>
+        </InputGroup>
 
-        <FormGroup>
-          <Input
-            type="text"
-            name="postLink"
-            id="postLink"
+        <InputGroup className="mb-3">
+          <FormControl
             placeholder="Enter Link"
+            aria-label="Enter Link"
+            aria-describedby="basic-addon1"
             onChange={(e) => this.onChangePostLink(e.target.value)}
             value={this.state.post.link}
           />
-        </FormGroup>
+        </InputGroup>
 
         <ReactTags
           allowNew={true}
