@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Collapse, Button } from "react-bootstrap";
 import GaugeChart from "react-gauge-chart";
 import firebase from "../../Config/firebase";
+import RatePost from "../RatePost/RatePost";
 
 const db = firebase.firestore();
 
@@ -90,9 +91,7 @@ class ViewPost extends Component {
               onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
               aria-controls="example-collapse-text"
               aria-expanded={this.state.infoOpen}
-            >
-              click
-            </Button>
+            ></Button>
             <Collapse in={this.state.infoOpen}>
               <div id="example-collapse-text">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life
