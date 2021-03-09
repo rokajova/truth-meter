@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { Collapse, Button } from "react-bootstrap";
 import GaugeChart from "react-gauge-chart";
 import firebase from "../../Config/firebase";
 
@@ -11,6 +12,7 @@ class ViewPost extends Component {
     this.state = {
       post: {},
       isLoaded: false,
+      infoOpen: false,
     };
   }
 
@@ -80,12 +82,35 @@ class ViewPost extends Component {
     if (this.state.isLoaded) {
       const gaugeStyle = { width: 400 };
       return (
-        <div>
-          <div>Title: {this.state.post.title}</div>
+        <div style={{ border: "1px solid black" }}>
           <div>
-            Date: {this.timeStampToString(this.state.post.createDate.seconds)}
+            <p style={{ display: "inline-block" }}>{this.state.post.link}</p>
+            <Button
+              style={{ display: "inline-block" }}
+              onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
+              aria-controls="example-collapse-text"
+              aria-expanded={this.state.infoOpen}
+            >
+              click
+            </Button>
+            <Collapse in={this.state.infoOpen}>
+              <div id="example-collapse-text">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
+              </div>
+            </Collapse>
           </div>
-          <div>Created by: {this.state.post.createUserName}</div>
+
+          <iframe
+            src={this.state.post.link}
+            style={{
+              width: "100%",
+              height: "80vh",
+              border: "none",
+            }}
+          />
           <GaugeChart
             id="gauge-chart6"
             style={gaugeStyle}
@@ -95,15 +120,6 @@ class ViewPost extends Component {
             percent={this.state.post.ratingScore / 100}
             needleColor="#345243"
           />
-          <iframe
-            src={this.state.post.link}
-            style={{
-              width: "100%",
-              height: "80vh",
-              borderRadius: "10px",
-              border: "none",
-            }}
-          ></iframe>
         </div>
       );
     } else {
