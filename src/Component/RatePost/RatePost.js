@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
+import GaugeChart from "react-gauge-chart";
 
 const db = firebase.firestore();
 
@@ -11,15 +12,24 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
+      // posts ratingScore from firebase
+      ratingScore: "",
+      // current rate by user
       rate: "",
       // array with ratevalues from firebase
       rates: [],
     };
   }
 
-  // check if the user has rated on the post on first render, set state accordingly
+  // check if the user has rated on the post on first render, check what the ratingScore of the post is
+  // and update state with the updated ratinScore, set state accordingly
   componentDidMount() {
+    // get post and user refs
     const userRef = db.collection("Users").doc(this.props.auth.uid);
+    const postRef = db
+      .collection("Posts")
+      .doc(this.props.location.state.post.id);
+
     userRef.get().then((doc) => {
       if (doc.exists) {
         this.setState({ hasLoaded: true });
@@ -32,6 +42,10 @@ export default class RatePost extends Component {
           console.log("user has not rated on this post!");
         }
       }
+    });
+
+    postRef.onSnapshot((doc) => {
+      this.setState({ ratingScore: doc.data().ratingScore });
     });
   }
 
@@ -98,9 +112,15 @@ export default class RatePost extends Component {
   render() {
     return (
       <div>
-        <div style={{ textAlign: "center" }}>
-          {this.state.rate + this.props.location.state.post.id}
-        </div>
+        <GaugeChart
+          style={{ width: 200 }}
+          id="gauge-chart6"
+          animate={false}
+          textColor="black"
+          nrOfLevels={15}
+          percent={this.state.ratingScore / 100}
+          needleColor="#345243"
+        />
 
         {this.state.hasRated ? (
           <div>
@@ -111,7 +131,6 @@ export default class RatePost extends Component {
           <div>
             <Form>
               <Form.Group controlId="formBasicRange">
-                <Form.Label>Range</Form.Label>
                 <Form.Control
                   type="range"
                   value={this.state.rate}

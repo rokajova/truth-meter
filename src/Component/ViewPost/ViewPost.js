@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Collapse, Button } from "react-bootstrap";
-import GaugeChart from "react-gauge-chart";
 import firebase from "../../Config/firebase";
-import RatePost from "../RatePost/RatePost";
 
 const db = firebase.firestore();
 
@@ -20,20 +18,7 @@ class ViewPost extends Component {
   //If state is defined, populate post state with post data from this.props.location.state.post, set isLoaded to true.
   //If state is not defined, run getPostByID function passing post id
   componentDidMount() {
-    if (typeof this.props.location.state !== "undefined") {
-      if (this.props.location.state.hasOwnProperty("post")) {
-        this.setState(
-          {
-            post: this.props.location.state.post,
-          },
-          () => {
-            this.setState({ isLoaded: true });
-          }
-        );
-      }
-    } else {
-      this.getPostByID(this.props.match.params.id);
-    }
+    this.getPostByID(this.props.match.params.id);
   }
 
   // Convert createDate timestamp to string with result being YYYY/MM/DD HH:MM:SS
@@ -61,6 +46,7 @@ class ViewPost extends Component {
   getPostByID = (postid) => {
     db.collection("Posts")
       .doc(postid)
+      // do i need to use onSnapshot here, if im migrating GaugeChart to RatePost component?
       .onSnapshot((doc) => {
         if (doc.exists) {
           this.setState(
@@ -81,7 +67,6 @@ class ViewPost extends Component {
 
   render() {
     if (this.state.isLoaded) {
-      const gaugeStyle = { width: 400 };
       return (
         <div style={{ border: "1px solid black" }}>
           <div>
@@ -93,12 +78,7 @@ class ViewPost extends Component {
               aria-expanded={this.state.infoOpen}
             ></Button>
             <Collapse in={this.state.infoOpen}>
-              <div id="example-collapse-text">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                accusamus terry richardson ad squid. Nihil anim keffiyeh
-                helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                ea proident.
-              </div>
+              <div id="example-collapse-text">info here</div>
             </Collapse>
           </div>
 
@@ -109,15 +89,6 @@ class ViewPost extends Component {
               height: "80vh",
               border: "none",
             }}
-          />
-          <GaugeChart
-            id="gauge-chart6"
-            style={gaugeStyle}
-            animate={false}
-            textColor="black"
-            nrOfLevels={15}
-            percent={this.state.post.ratingScore / 100}
-            needleColor="#345243"
           />
         </div>
       );
