@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import GaugeChart from "react-gauge-chart";
 
@@ -111,42 +111,44 @@ export default class RatePost extends Component {
 
   render() {
     return (
-      <div>
-        <GaugeChart
-          style={{ width: 200 }}
-          id="gauge-chart6"
-          animate={false}
-          textColor="black"
-          nrOfLevels={15}
-          percent={this.state.ratingScore / 100}
-          needleColor="#345243"
-        />
+      <Container fluid>
+        <Row>
+          {" "}
+          <GaugeChart
+            style={{ width: 200 }}
+            id="gauge-chart6"
+            animate={false}
+            textColor="black"
+            nrOfLevels={15}
+            percent={this.state.ratingScore / 100}
+            needleColor="#345243"
+          />
+          {this.state.hasRated ? (
+            <div>
+              <p>You have already rated this post</p>
+              <Button disabled>Submit</Button>
+            </div>
+          ) : (
+            <div>
+              <Form>
+                <Form.Group controlId="formBasicRange">
+                  <Form.Control
+                    type="range"
+                    value={this.state.rate}
+                    min="0"
+                    max="100"
+                    onChange={(e) => this.onChangeRateInput(e.target.value)}
+                  />
+                </Form.Group>
+              </Form>
 
-        {this.state.hasRated ? (
-          <div>
-            <p>You have already rated this post</p>
-            <Button disabled>Submit</Button>
-          </div>
-        ) : (
-          <div>
-            <Form>
-              <Form.Group controlId="formBasicRange">
-                <Form.Control
-                  type="range"
-                  value={this.state.rate}
-                  min="0"
-                  max="100"
-                  onChange={(e) => this.onChangeRateInput(e.target.value)}
-                />
-              </Form.Group>
-            </Form>
-
-            <Button color="success" onClick={() => this.onSubmit()}>
-              Submit
-            </Button>
-          </div>
-        )}
-      </div>
+              <Button color="success" onClick={() => this.onSubmit()}>
+                Submit
+              </Button>
+            </div>
+          )}
+        </Row>
+      </Container>
     );
   }
 }
