@@ -1,0 +1,20 @@
+.Container {
+  margin: 10px auto;
+  padding: 20px;
+  max-height: 85vh;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+.Container::-webkit-scrollbar {
+  display: none;
+}
+.Button {
+  display: none;
+}
+
+.Loading {
+  display: block;
+  font-size: 2em;
+  text-align: center;
+  margin: 10px 0;
+}

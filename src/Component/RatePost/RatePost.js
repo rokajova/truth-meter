@@ -113,40 +113,48 @@ export default class RatePost extends Component {
     return (
       <Container fluid>
         <Row>
-          {" "}
-          <GaugeChart
-            style={{ width: 200 }}
-            id="gauge-chart6"
-            animate={false}
-            textColor="black"
-            nrOfLevels={15}
-            percent={this.state.ratingScore / 100}
-            needleColor="#345243"
-          />
-          {this.state.hasRated ? (
-            <div>
-              <p>You have already rated this post</p>
-              <Button disabled>Submit</Button>
-            </div>
-          ) : (
-            <div>
-              <Form>
-                <Form.Group controlId="formBasicRange">
-                  <Form.Control
-                    type="range"
-                    value={this.state.rate}
-                    min="0"
-                    max="100"
-                    onChange={(e) => this.onChangeRateInput(e.target.value)}
-                  />
-                </Form.Group>
-              </Form>
+          <Col sm={2}>
+            {" "}
+            <GaugeChart
+              style={{ width: 200 }}
+              id="gauge-chart6"
+              animate={false}
+              textColor="black"
+              nrOfLevels={15}
+              percent={this.state.ratingScore / 100}
+              needleColor="#345243"
+            />
+          </Col>
+          <Col sm={10}>
+            {" "}
+            {this.state.hasRated ? (
+              <div>
+                <p>You have already rated this post</p>
+              </div>
+            ) : (
+              <div>
+                <Form>
+                  <Form.Group controlId="formBasicRange">
+                    <Form.Control
+                      type="range"
+                      value={this.state.rate}
+                      min="0"
+                      max="100"
+                      onChange={(e) => this.onChangeRateInput(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
 
-              <Button color="success" onClick={() => this.onSubmit()}>
-                Submit
-              </Button>
-            </div>
-          )}
+                <Button
+                  size="sm"
+                  color="success"
+                  onClick={() => this.onSubmit()}
+                >
+                  Rate
+                </Button>
+              </div>
+            )}
+          </Col>
         </Row>
       </Container>
     );

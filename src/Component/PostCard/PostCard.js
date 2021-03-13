@@ -28,8 +28,6 @@ export function timeStampToString(ts) {
 }
 
 const PostCard = (props) => {
-  // gauge style
-
   return (
     <Link
       to={{ pathname: "post/" + props.data.id, state: { post: props.data } }}
