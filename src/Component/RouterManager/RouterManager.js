@@ -70,6 +70,7 @@ class RouterManager extends Component {
             path="/new-post"
             component={AdminOnly(NewPost, this.props.auth)}
           />
+      
         </Switch>
       </div>
     );

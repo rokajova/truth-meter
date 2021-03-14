@@ -3,8 +3,15 @@ import { Container, Spinner } from "react-bootstrap";
 import PostCard from "../PostCard/PostCard";
 import firebase from "../../Config/firebase";
 import classes from "./Main.module.css";
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 
 const db = firebase.firestore();
+
+const searchClient = algoliasearch(
+  '5K3L830FWN',
+  '35d3843c2a54cf8a7a59d20ea50ef518'
+);
 
 class Main extends Component {
   constructor(props) {
@@ -99,6 +106,8 @@ class Main extends Component {
   render() {
     return (
       <div>
+        <InstantSearch indexName="Posts" searchClient={searchClient}
+        > <SearchBox/><Hits/></InstantSearch>
         <div
           className={classes.Container}
           onScroll={() => this.handleScroll()}
