@@ -8,6 +8,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
+      hasLoaded: false,
       userData: [],
     };
   }
@@ -17,7 +18,9 @@ class Profile extends Component {
     const userRef = db.collection("Users").doc(this.props.auth.uid);
     userRef.get().then((doc) => {
       if (doc.exists) {
-        this.setState({ userData: doc.data() });
+        this.setState({ userData: doc.data() }, () => {
+          this.setState({ hasLoaded: true });
+        });
       }
     });
   }
@@ -25,11 +28,9 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        {" "}
-        Posts by user: {this.state.userData.userPosts}
-        <br />
-        Rates by user: {this.state.userData.userRatesID}
-        {this.state.userData.userRatesScore}
+        user posts:
+        {this.state.hasLoaded &&
+          this.state.userData.userPosts.map((post) => <li>{post}</li>)}
       </div>
     );
   }

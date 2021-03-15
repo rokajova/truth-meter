@@ -4,12 +4,7 @@ import PostCard from "../PostCard/PostCard";
 import firebase from "../../Config/firebase";
 import classes from "./Main.module.css";
 
-
-
-
-
 const db = firebase.firestore();
-
 
 class Main extends Component {
   constructor(props) {
@@ -104,7 +99,6 @@ class Main extends Component {
   render() {
     return (
       <div>
-  
         <div
           className={classes.Container}
           onScroll={() => this.handleScroll()}
@@ -112,11 +106,10 @@ class Main extends Component {
         >
           {" "}
           {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
-          {this.state.isLoaded
-            ? this.state.posts.map((post, index) => {
-                return <PostCard key={index} data={post} />;
-              })
-            : ""}
+          {this.state.isLoaded &&
+            this.state.posts.map((post, index) => {
+              return <PostCard key={index} data={post} />;
+            })}
         </div>
         {this.state.showLoading ? (
           <div className={classes.Loading}>
