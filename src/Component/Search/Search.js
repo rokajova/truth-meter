@@ -1,37 +1,39 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import algoliasearch from 'algoliasearch/lite';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
   Configure,
   Hits,
   Highlight,
   connectSearchBox,
-} from 'react-instantsearch-dom';
-import Autocomplete from './Autocomplete';
-import './Search.css';
+} from "react-instantsearch-dom";
+import Autocomplete from "./Autocomplete";
+import "./Search.css";
+import { withRouter } from "react-router-dom";
 
 const VirtalSearchBox = connectSearchBox(() => null);
 
 const searchClient = algoliasearch(
-  'B1G2GM9NG0',
-  'aadef574be1f9252bb48d4ea09b5cfe5'
+  "5K3L830FWN",
+  "35d3843c2a54cf8a7a59d20ea50ef518"
 );
 
 class Search extends Component {
   state = {
-    query: '',
+    query: "",
   };
 
   onSuggestionSelected = (_, { suggestion }) => {
     this.setState({
       query: suggestion.name,
     });
+    console.log(suggestion.link);
   };
 
   onSuggestionCleared = () => {
     this.setState({
-      query: '',
+      query: "",
     });
   };
 
@@ -40,34 +42,16 @@ class Search extends Component {
 
     return (
       <div className="container">
-        <h1>React InstantSearch - Results page with autocomplete</h1>
-        <InstantSearch indexName="demo_ecommerce" searchClient={searchClient}>
+        <InstantSearch indexName="Posts" searchClient={searchClient}>
           <Configure hitsPerPage={5} />
           <Autocomplete
             onSuggestionSelected={this.onSuggestionSelected}
             onSuggestionCleared={this.onSuggestionCleared}
           />
         </InstantSearch>
-
-        <InstantSearch indexName="demo_ecommerce" searchClient={searchClient}>
-          <VirtalSearchBox defaultRefinement={query} />
-          <Hits hitComponent={Hit} />
-        </InstantSearch>
       </div>
     );
   }
 }
 
-function Hit(props) {
-  return (
-    <div>
-      <Highlight attribute="name" hit={props.hit} />
-    </div>
-  );
-}
-
-Hit.propTypes = {
-  hit: PropTypes.object.isRequired,
-};
-
-export default Search;
+export default withRouter(Search);
