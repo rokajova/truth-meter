@@ -7,6 +7,7 @@ import NewPost from "../NewPost/NewPost";
 import Login from "../Login/Login";
 import RatePost from "../RatePost/RatePost";
 import Profile from "../Profile/Profile";
+import Search from "../Search/Search"
 
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -49,6 +50,9 @@ class RouterManager extends Component {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
           <Route
             path="/profile"
