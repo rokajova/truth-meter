@@ -28,9 +28,28 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        user posts:
-        {this.state.hasLoaded &&
-          this.state.userData.userPosts.map((post) => <li>{post}</li>)}
+        {this.state.hasLoaded && (
+          <div>
+            {this.state.userData.userPosts && (
+              <div>
+                user posts:
+                {this.state.userData.userPosts.map((post) => (
+                  <li>{post}</li>
+                ))}
+              </div>
+            )}
+            {this.state.userData.userPosts && (
+              <div>
+                user rates:
+                {this.state.userData.userRatesID.map((rate, i) => (
+                  <li>
+                    {rate}, {this.state.userData.userRatesScore[i]}
+                  </li>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
