@@ -28,13 +28,13 @@ export default class RatePost extends Component {
     const userRef = db.collection("Users").doc(this.props.auth.uid);
     const postRef = db
       .collection("Posts")
-      .doc(this.props.location.state.post.id);
+      .doc(this.props.location.pathname.slice(6));
 
     userRef.get().then((doc) => {
       if (doc.exists) {
         this.setState({ hasLoaded: true });
         if (
-          doc.data().userRatesID.includes(this.props.location.state.post.id)
+          doc.data().userRatesID.includes(this.props.location.pathname.slice(6))
         ) {
           this.setState({ hasRated: true });
           console.log("user has rated on this post!");
@@ -53,7 +53,7 @@ export default class RatePost extends Component {
     // get post ref
     const postRef = db
       .collection("Posts")
-      .doc(this.props.location.state.post.id);
+      .doc(this.props.location.pathname.slice(6));
 
     const doc = await postRef.get();
     // calculate the sum of rates array
@@ -68,7 +68,7 @@ export default class RatePost extends Component {
   updatePostsCol = async () => {
     const postRef = db
       .collection("Posts")
-      .doc(this.props.location.state.post.id);
+      .doc(this.props.location.pathname.slice(6));
     // add current rate to the rates array in the Posts doc
     const doc = await postRef.get();
     await postRef.update({
@@ -82,7 +82,9 @@ export default class RatePost extends Component {
 
     return userRef.onSnapshot((doc) => {
       // if user has rated the post
-      if (doc.data().userRatesID.includes(this.props.location.state.post.id)) {
+      if (
+        doc.data().userRatesID.includes(this.props.location.pathname.slice(6))
+      ) {
         this.setState({ hasRated: true });
         // if user has NOT rated the post, update userRates field with post id and rating score in Users collection
       } else {
@@ -90,7 +92,7 @@ export default class RatePost extends Component {
           userRatesID: [
             ...doc.data().userRatesID,
 
-            this.props.location.state.post.id,
+            this.props.location.pathname.slice(6),
           ],
           userRatesScore: [...doc.data().userRatesScore, this.state.rate],
         });

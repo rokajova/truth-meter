@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import firebase from "../../Config/firebase";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import classes from "./Header.module.css";
 import Search from "../Search/Search";
 
@@ -46,16 +46,8 @@ class Header extends Component {
           {" "}
           <Navbar.Brand className="text-white">TruthMeter</Navbar.Brand>
         </Link>
-
-        {/* <Form inline>
-          <FormControl
-            type="text"
-            placeholder="enter a tag"
-            className="mr-sm-3"
-          />
-          
-        </Form> */}
         <Search />
+
         <Navbar.Toggle className="ml-auto" aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
@@ -115,4 +107,4 @@ const enhance = connect(({ firebase: { auth, profile } }) => ({
   profile,
 }));
 
-export default enhance(Header);
+export default enhance(withRouter(Header));

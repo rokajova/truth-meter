@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
   Configure,
-  Hits,
-  Highlight,
   connectSearchBox,
 } from "react-instantsearch-dom";
 import Autocomplete from "./Autocomplete";
 import "./Search.css";
-import { withRouter } from "react-router-dom";
 
 const VirtalSearchBox = connectSearchBox(() => null);
 
@@ -28,7 +25,7 @@ class Search extends Component {
     this.setState({
       query: suggestion.name,
     });
-    console.log(suggestion.link);
+    window.open("/post/" + suggestion.objectID);
   };
 
   onSuggestionCleared = () => {
@@ -54,4 +51,4 @@ class Search extends Component {
   }
 }
 
-export default withRouter(Search);
+export default Search;
