@@ -42,7 +42,7 @@ const PostCard = (props) => {
               style={{ maxWidth: "150px" }}
               textColor="black"
               id="gauge-chart6"
-              animate={false}
+              animate={true}
               nrOfLevels={15}
               percent={props.data.ratingScore / 100}
               needleColor="#345243"

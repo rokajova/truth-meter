@@ -43,6 +43,7 @@ export default class RatePost extends Component {
         }
       }
     });
+    // TypeError: Cannot read property 'ratingScore' of undefined, this happens when i go to an unavailable website? need to change link input
 
     postRef.onSnapshot((doc) => {
       this.setState({ ratingScore: doc.data().ratingScore });
@@ -120,7 +121,7 @@ export default class RatePost extends Component {
             <GaugeChart
               style={{ width: 200 }}
               id="gauge-chart6"
-              animate={false}
+              animate={true}
               textColor="black"
               nrOfLevels={15}
               percent={this.state.ratingScore / 100}
