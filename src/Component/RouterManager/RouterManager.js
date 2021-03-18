@@ -7,9 +7,9 @@ import NewPost from "../NewPost/NewPost";
 import Login from "../Login/Login";
 import RatePost from "../RatePost/RatePost";
 import Profile from "../Profile/Profile";
-import Search from "../Search/Search"
+import Search from "../Search/Search";
 
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // admin function
@@ -74,7 +74,8 @@ class RouterManager extends Component {
             path="/new-post"
             component={AdminOnly(NewPost, this.props.auth)}
           />
-      
+          {/* redirects to home page on non link */}
+          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
         </Switch>
       </div>
     );
