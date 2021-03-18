@@ -67,6 +67,14 @@ class ViewPost extends Component {
 
   render() {
     if (this.state.isLoaded) {
+      // make the link have a protocol and the start ()
+      let link;
+      if (!this.state.post.link.slice(0, 4).includes("http")) {
+        link = "https://" + this.state.post.link;
+      } else {
+        link = this.state.post.link;
+      }
+
       return (
         <div style={{ border: "1px solid black" }}>
           <div>
@@ -83,13 +91,14 @@ class ViewPost extends Component {
           </div>
 
           <iframe
-            src={this.state.post.link}
+            src={link}
             style={{
               width: "100%",
               height: "80vh",
               border: "none",
             }}
           />
+          <button onClick={() => console.log(link)}>asd</button>
         </div>
       );
     } else {
