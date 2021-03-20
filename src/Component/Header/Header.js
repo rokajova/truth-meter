@@ -41,63 +41,70 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar bg="dark" expand="lg">
-        <Link to={{ pathname: "/" }}>
-          {" "}
-          <Navbar.Brand className="text-white">TruthMeter</Navbar.Brand>
-        </Link>
-        <Search />
+      <div>
+        {this.props.auth.isLoaded && (
+          <Navbar bg="dark" expand="lg">
+            <Link to={{ pathname: "/" }}>
+              {" "}
+              <Navbar.Brand className="text-white">TruthMeter</Navbar.Brand>
+            </Link>
+            <Search />
 
-        <Navbar.Toggle className="ml-auto" aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle
+              className="ml-auto"
+              aria-controls="basic-navbar-nav"
+            />
 
-        <Navbar.Collapse id="basic-navbar-nav">
-          {this.props.auth.isEmpty ? (
-            <Nav className="ml-auto ">
-              <Nav.Link>
-                <Link to="/login">
-                  {" "}
-                  &nbsp; <i className="fas fa-user" /> LOG IN/SIGN UP
-                </Link>
-              </Nav.Link>
+            <Navbar.Collapse id="basic-navbar-nav">
+              {this.props.auth.isEmpty ? (
+                <Nav className="ml-auto ">
+                  <Nav.Link>
+                    <Link to="/login">
+                      {" "}
+                      &nbsp; <i className="fas fa-user" /> LOG IN/SIGN UP
+                    </Link>
+                  </Nav.Link>
 
-              <Nav.Link>
-                &nbsp; <i className="fas fa-info" /> INFO
-              </Nav.Link>
-            </Nav>
-          ) : (
-            <Nav className="ml-auto">
-              <Nav.Link>
-                <Link to="/new-post">
-                  {" "}
-                  &nbsp; <i className="fas fa-plus" />
-                  NEW POST
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                {" "}
-                &nbsp; <i className="fas fa-info" />
-                INFO
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/profile">
-                  {" "}
-                  &nbsp; <i className="fas fa-user" />
-                  PROFILE
-                </Link>
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  firebase.auth().signOut();
-                }}
-              >
-                {" "}
-                &nbsp; <i className="fas fa-minus" />
-                LOG OUT
-              </Nav.Link>
-            </Nav>
-          )}
-        </Navbar.Collapse>
-      </Navbar>
+                  <Nav.Link>
+                    &nbsp; <i className="fas fa-info" /> INFO
+                  </Nav.Link>
+                </Nav>
+              ) : (
+                <Nav className="ml-auto">
+                  <Nav.Link>
+                    <Link to="/new-post">
+                      {" "}
+                      &nbsp; <i className="fas fa-plus" />
+                      NEW POST
+                    </Link>
+                  </Nav.Link>
+                  <Nav.Link>
+                    {" "}
+                    &nbsp; <i className="fas fa-info" />
+                    INFO
+                  </Nav.Link>
+                  <Nav.Link>
+                    <Link to="/profile">
+                      {" "}
+                      &nbsp; <i className="fas fa-user" />
+                      PROFILE
+                    </Link>
+                  </Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      firebase.auth().signOut();
+                    }}
+                  >
+                    {" "}
+                    &nbsp; <i className="fas fa-minus" />
+                    LOG OUT
+                  </Nav.Link>
+                </Nav>
+              )}
+            </Navbar.Collapse>
+          </Navbar>
+        )}
+      </div>
     );
   }
 }

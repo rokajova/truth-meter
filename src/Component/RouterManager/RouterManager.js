@@ -48,12 +48,15 @@ class RouterManager extends Component {
           <Route path="/" exact>
             <Main />
           </Route>
+
           <Route path="/login">
             <Login />
           </Route>
+
           <Route path="/search">
             <Search />
           </Route>
+
           <Route
             path="/profile"
             component={AdminOnly(Profile, this.props.auth)}
@@ -64,6 +67,7 @@ class RouterManager extends Component {
               path="/post/:id"
               component={AdminOnly(ViewPost, this.props.auth)}
             />
+
             <Route
               path="/post/:id"
               component={AdminOnly(RatePost, this.props.auth)}
@@ -74,6 +78,7 @@ class RouterManager extends Component {
             path="/new-post"
             component={AdminOnly(NewPost, this.props.auth)}
           />
+
           {/* redirects to home page on non link */}
           <Route render={() => <Redirect to={{ pathname: "/" }} />} />
         </Switch>
