@@ -31,8 +31,8 @@ export default class RatePost extends Component {
       .doc(this.props.location.pathname.slice(6));
 
     userRef.get().then((doc) => {
+      this.setState({ hasLoaded: true });
       if (doc.exists) {
-        this.setState({ hasLoaded: true });
         if (
           doc.data().userRatesID.includes(this.props.location.pathname.slice(6))
         ) {
@@ -113,53 +113,65 @@ export default class RatePost extends Component {
   };
 
   render() {
-    return (
-      <Container fluid>
-        <Row>
-          <Col sm={2}>
-            {" "}
-            <GaugeChart
-              style={{ width: 200 }}
-              id="gauge-chart6"
-              animate={true}
-              textColor="black"
-              nrOfLevels={15}
-              percent={this.state.ratingScore / 100}
-              needleColor="#345243"
-            />
-          </Col>
-          <Col sm={10}>
-            {" "}
-            {this.state.hasRated ? (
-              <div>
-                <p>You have already rated this post</p>
-              </div>
-            ) : (
-              <div>
-                <Form>
-                  <Form.Group controlId="formBasicRange">
-                    <Form.Control
-                      type="range"
-                      value={this.state.rate}
-                      min="0"
-                      max="100"
-                      onChange={(e) => this.onChangeRateInput(e.target.value)}
-                    />
-                  </Form.Group>
-                </Form>
+    if (this.state.hasLoaded) {
+      return (
+        <Container fluid>
+          <Row>
+            <Col sm={2}>
+              {" "}
+              <GaugeChart
+                style={{ width: 200 }}
+                id="gauge-chart6"
+                animate={true}
+                textColor="black"
+                nrOfLevels={15}
+                percent={this.state.ratingScore / 100}
+                needleColor="#345243"
+              />
+            </Col>
+            <Col sm={10}>
+              {this.props.auth.isEmpty ? (
+                <div>Please log in to rate this post</div>
+              ) : (
+                <div>
+                  {" "}
+                  {this.state.hasRated ? (
+                    <div>
+                      <p>You have already rated this post</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <Form>
+                        <Form.Group controlId="formBasicRange">
+                          <Form.Control
+                            type="range"
+                            value={this.state.rate}
+                            min="0"
+                            max="100"
+                            onChange={(e) =>
+                              this.onChangeRateInput(e.target.value)
+                            }
+                          />
+                        </Form.Group>
+                      </Form>
 
-                <Button
-                  size="sm"
-                  color="success"
-                  onClick={() => this.onSubmit()}
-                >
-                  Rate
-                </Button>
-              </div>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    );
+                      <Button
+                        size="sm"
+                        color="success"
+                        onClick={() => this.onSubmit()}
+                      >
+                        Rate
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      );
+    } else {
+      return null;
+    }
   }
 }
