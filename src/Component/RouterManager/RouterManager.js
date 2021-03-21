@@ -9,6 +9,8 @@ import RatePost from "../RatePost/RatePost";
 import Profile from "../Profile/Profile";
 import Search from "../Search/Search";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -73,11 +75,15 @@ class RouterManager extends Component {
               component={AdminOnly(RatePost, this.props.auth)}
             />
           </Route>
-
           <Route
             path="/new-post"
             component={AdminOnly(NewPost, this.props.auth)}
           />
+          {/* <ProtectedRoute
+            path="/new-post"
+            component={AdminOnly(NewPost, this.props.auth)}
+            isAuth={!this.props.auth.isEmpty}
+          /> */}
 
           {/* redirects to home page on non link */}
           <Route render={() => <Redirect to={{ pathname: "/" }} />} />
