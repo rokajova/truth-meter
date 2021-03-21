@@ -51,18 +51,33 @@ class RouterManager extends Component {
             <Main />
           </Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/login"
+              component={AdminOnly(Login, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
 
           <Route path="/search">
             <Search />
           </Route>
 
-          <Route
-            path="/profile"
-            component={AdminOnly(Profile, this.props.auth)}
-          />
+          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/profile"
+              component={AdminOnly(Profile, this.props.auth)}
+              isAuth={!this.props.auth.isEmpty}
+              redirectpathname="/login"
+            />
+          ) : (
+            <div></div>
+          )}
 
           <Route path="/post/:id">
             <Route
@@ -75,15 +90,18 @@ class RouterManager extends Component {
               component={AdminOnly(RatePost, this.props.auth)}
             />
           </Route>
-          <Route
-            path="/new-post"
-            component={AdminOnly(NewPost, this.props.auth)}
-          />
-          {/* <ProtectedRoute
-            path="/new-post"
-            component={AdminOnly(NewPost, this.props.auth)}
-            isAuth={!this.props.auth.isEmpty}
-          /> */}
+
+          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/new-post"
+              component={AdminOnly(NewPost, this.props.auth)}
+              isAuth={!this.props.auth.isEmpty}
+              redirectpathname="/login"
+            />
+          ) : (
+            <div></div>
+          )}
 
           {/* redirects to home page on non link */}
           <Route render={() => <Redirect to={{ pathname: "/" }} />} />

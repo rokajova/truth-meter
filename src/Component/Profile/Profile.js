@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 const db = firebase.firestore();
 
@@ -15,7 +15,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.auth);
     // populate userData array with user data from firebase on first render
     const userRef = db.collection("Users").doc(this.props.auth.uid);
     userRef.get().then((doc) => {
@@ -30,35 +29,26 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <button
-          onClick={() => {
-            console.log(this.props.auth);
-          }}
-        >
-          sdag
-        </button>
-        {this.state.hasLoaded && (
-          <div>
-            {this.state.userData.userPosts && (
-              <div>
-                user posts:
-                {this.state.userData.userPosts.map((post) => (
-                  <li>{post}</li>
-                ))}
-              </div>
-            )}
-            {this.state.userData.userPosts && (
-              <div>
-                user rates:
-                {this.state.userData.userRatesID.map((rate, i) => (
-                  <li>
-                    {rate}, {this.state.userData.userRatesScore[i]}
-                  </li>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        <div>
+          {this.state.userData.userPosts && (
+            <div>
+              user posts:
+              {this.state.userData.userPosts.map((post) => (
+                <li>{post}</li>
+              ))}
+            </div>
+          )}
+          {this.state.userData.userPosts && (
+            <div>
+              user rates:
+              {this.state.userData.userRatesID.map((rate, i) => (
+                <li>
+                  {rate}, {this.state.userData.userRatesScore[i]}
+                </li>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

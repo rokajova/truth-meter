@@ -1,7 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-function ProtectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
+// check if user has logged, if true, then allow to render the component, if false, redirect somewhere else. This component goes to RouterManager
+function ProtectedRoute({
+  isAuth: isAuth,
+  component: Component,
+  redirectpathname: pathname,
+  ...rest
+}) {
   return (
     <Route
       {...rest}
@@ -11,7 +17,7 @@ function ProtectedRoute({ isAuth: isAuth, component: Component, ...rest }) {
         } else {
           return (
             <Redirect
-              to={{ pathname: "/login", state: { from: props.location } }}
+              to={{ pathname: pathname, state: { from: props.location } }}
             />
           );
         }
