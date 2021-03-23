@@ -3,6 +3,7 @@ import { Container, Spinner } from "react-bootstrap";
 import PostCard from "../PostCard/PostCard";
 import firebase from "../../Config/firebase";
 import classes from "./Main.module.css";
+import Search from "../Search/Search";
 
 const db = firebase.firestore();
 
@@ -106,6 +107,7 @@ class Main extends Component {
         >
           {" "}
           {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
+          <Search />
           {this.state.isLoaded &&
             this.state.posts.map((post, index) => {
               return <PostCard key={index} data={post} />;

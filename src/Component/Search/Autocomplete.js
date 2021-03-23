@@ -47,7 +47,7 @@ class AutoComplete extends Component {
     const { value } = this.state;
 
     const inputProps = {
-      placeholder: "Search for a product...",
+      placeholder: "Type in a link...",
       onChange: this.onChange,
       value,
     };
