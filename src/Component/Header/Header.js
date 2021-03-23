@@ -48,7 +48,9 @@ class Header extends Component {
               {" "}
               <Navbar.Brand className="text-white">TruthMeter</Navbar.Brand>
             </Link>
-
+            <Form inline>
+              <Search />
+            </Form>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
             <Navbar.Collapse id="basic-navbar-nav">
