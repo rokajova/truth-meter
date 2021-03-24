@@ -107,7 +107,6 @@ class Main extends Component {
         >
           {" "}
           {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
-          <Search />
           {this.state.isLoaded &&
             this.state.posts.map((post, index) => {
               return <PostCard key={index} data={post} />;
