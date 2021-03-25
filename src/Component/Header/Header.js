@@ -35,23 +35,53 @@ class Header extends Component {
   render() {
     return (
       <nav className="NavbarItems">
-        <h1 className="navbar-logo">TruthMeter</h1>
+        <Link className="navbar-logo" to="/">
+          TruthMeter
+        </Link>
+        <div>
+          <i className="fas fa-search mr-auto" />
+        </div>
         <div className="menu-icon" onClick={this.toggle}>
           <i
             className={this.state.isClicked ? "fas fa-times" : "fas fa-bars"}
           ></i>
         </div>
-        <ul className={this.state.isClicked ? "nav-menu active" : "nav-menu"}>
-          {MenuItems.map((item, index) => {
-            return (
-              <li key={index}>
-                <a className={item.cName} href={item.url}>
-                  {item.title}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        {this.props.auth.isEmpty ? (
+          <ul className={this.state.isClicked ? "nav-menu active" : "nav-menu"}>
+            <Link className="nav-links" to="/login">
+              &nbsp; <i className="fas fa-user mr-1" />
+              <span>LOG IN</span>
+            </Link>
+            <Link className="nav-links" to="/info">
+              &nbsp; <i className="fas fa-info mr-1" />
+              <span>INFO</span>
+            </Link>
+          </ul>
+        ) : (
+          <ul className={this.state.isClicked ? "nav-menu active" : "nav-menu"}>
+            <Link className="nav-links" to="/new-post">
+              &nbsp; <i className="fas fa-plus mr-1" />
+              <span>NEW POST</span>
+            </Link>
+            <Link className="nav-links" to="/info">
+              &nbsp; <i className="fas fa-info mr-1" />
+              <span>INFO</span>
+            </Link>
+            <Link className="nav-links" to="/profile">
+              &nbsp; <i className="fas fa-user mr-1" />
+              <span>PROFILE</span>
+            </Link>
+            <li
+              className="nav-links"
+              onClick={() => {
+                firebase.auth().signOut();
+              }}
+            >
+              &nbsp; <i className="fas fa-minus mr-1" />
+              <span>LOG OUT</span>
+            </li>
+          </ul>
+        )}
       </nav>
     );
   }

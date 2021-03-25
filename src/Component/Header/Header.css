@@ -20,7 +20,6 @@
 .navbar-logo {
   color: #fff;
   justify-self: start;
-  margin-left: 20px;
   cursor: pointer;
 }
 
@@ -45,10 +44,18 @@
   background-color: #6d76f7;
   border-radius: 4px;
   transition: all 0.2 ease-out;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
 }
 
 .fa-bars {
   color: #fff;
+}
+
+.fa-search {
+  color: #fff;
+  cursor: pointer;
 }
 
 .nav-links-mobile {
@@ -134,5 +141,6 @@
     background: #fff;
     color: #6568f4;
     transition: 250ms;
+    text-decoration: none;
   }
 }
