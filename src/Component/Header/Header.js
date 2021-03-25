@@ -4,7 +4,6 @@ import firebase from "../../Config/firebase";
 import { Link, withRouter } from "react-router-dom";
 import { MenuItems } from "./MenuItems";
 import "./Header.css";
-import { Button } from "./Button";
 
 class Header extends Component {
   constructor(props) {
@@ -53,7 +52,6 @@ class Header extends Component {
             );
           })}
         </ul>
-        <Button>Sign Up</Button>
       </nav>
     );
   }
