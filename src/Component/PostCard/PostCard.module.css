@@ -1,6 +1,6 @@
 .PostCardContainer {
   border: 2px solid black;
   border-bottom: none;
-
+  background: #e9ecec;
   margin-top: 10px;
 }
