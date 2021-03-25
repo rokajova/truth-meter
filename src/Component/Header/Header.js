@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
 import { connect } from "react-redux";
 import firebase from "../../Config/firebase";
 import { Link, withRouter } from "react-router-dom";
 import { MenuItems } from "./MenuItems";
+import "./Header.css";
+import { Button } from "./Button";
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
+      isClicked: false,
     };
   }
 
@@ -34,7 +29,7 @@ class Header extends Component {
 
   toggle = () => {
     this.setState({
-      isOpen: !this.state.isOpen,
+      isClicked: !this.state.isClicked,
     });
   };
 
@@ -42,8 +37,12 @@ class Header extends Component {
     return (
       <nav className="NavbarItems">
         <h1 className="navbar-logo">TruthMeter</h1>
-        <div className="menu-icon"></div>
-        <ul>
+        <div className="menu-icon" onClick={this.toggle}>
+          <i
+            className={this.state.isClicked ? "fas fa-times" : "fas fa-bars"}
+          ></i>
+        </div>
+        <ul className={this.state.isClicked ? "nav-menu active" : "nav-menu"}>
           {MenuItems.map((item, index) => {
             return (
               <li key={index}>
@@ -54,6 +53,7 @@ class Header extends Component {
             );
           })}
         </ul>
+        <Button>Sign Up</Button>
       </nav>
     );
   }
