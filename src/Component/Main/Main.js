@@ -59,7 +59,7 @@ class Main extends Component {
   getMyPosts = () => {
     db.collection("Posts")
       .orderBy("createDate", "desc")
-      .limit(10)
+      .limit(15)
       .onSnapshot((docs) => {
         if (!docs.empty) {
           let allPosts = [];
@@ -106,7 +106,7 @@ class Main extends Component {
           ref={this.myDiv}
         >
           {" "}
-          <Search />
+          {/* <Search /> */}
           {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
           {this.state.isLoaded &&
             this.state.posts.map((post, index) => {
