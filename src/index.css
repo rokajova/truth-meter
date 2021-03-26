@@ -5,11 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(
-    90deg,
-    rgb(110, 94, 254),
-    rgba(73, 63, 252, 1) 100%
-  );
+  background: linear-gradient(90deg, rgb(134, 125, 219), rgb(96, 92, 172) 100%);
   background-attachment: fixed;
   background-size: cover;
   background-position: bottom;
