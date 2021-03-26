@@ -36,9 +36,6 @@ class Header extends Component {
       <div>
         {this.props.auth.isLoaded && (
           <nav className="NavbarItems">
-            <Link className="navbar-logo" to="/">
-              <h2>TruthMeter</h2>
-            </Link>
             <Link to="/search">
               <i className="fas fa-search mr-auto" />
             </Link>

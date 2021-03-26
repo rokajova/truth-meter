@@ -1,6 +1,21 @@
 .PostCardContainer {
-  border: 2px solid black;
-  border-bottom: none;
-  background: #e9ecec;
-  margin-top: 10px;
+  border: 1px solid rgb(206, 223, 255);
+  background: #8585be;
+}
+
+.Link {
+  color: #fff;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Gauge {
+  max-width: 125px;
+  border-left: 1px solid rgb(206, 223, 255);
+  margin-left: auto;
 }

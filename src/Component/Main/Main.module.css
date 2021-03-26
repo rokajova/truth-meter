@@ -1,13 +1,10 @@
 .Container {
   padding: 20px;
-  max-height: 85vh;
+  max-height: 100vh;
   box-sizing: border-box;
   overflow: scroll;
 }
 .Container::-webkit-scrollbar {
-  display: none;
-}
-.Button {
   display: none;
 }
 

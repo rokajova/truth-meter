@@ -115,7 +115,7 @@ class Main extends Component {
         </div>
         {this.state.showLoading ? (
           <div className={classes.Loading}>
-            <Spinner animation="grow" />
+            <Spinner animation="grow" variant="light" />
           </div>
         ) : (
           ""
