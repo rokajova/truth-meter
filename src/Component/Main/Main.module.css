@@ -1,6 +1,5 @@
 .Container {
-  padding: 20px;
-  max-height: 100vh;
+  max-height: 90vh;
   box-sizing: border-box;
   overflow: scroll;
 }
@@ -12,5 +11,5 @@
   display: block;
   font-size: 2em;
   text-align: center;
-  margin: 10px 0;
+  margin: 5px 0;
 }

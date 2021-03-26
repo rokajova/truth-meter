@@ -59,7 +59,7 @@ class Main extends Component {
   getMyPosts = () => {
     db.collection("Posts")
       .orderBy("createDate", "desc")
-      .limit(15)
+      .limit(20)
       .onSnapshot((docs) => {
         if (!docs.empty) {
           let allPosts = [];

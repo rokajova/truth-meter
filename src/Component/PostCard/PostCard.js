@@ -29,26 +29,28 @@ export function timeStampToString(ts) {
 
 const PostCard = (props) => {
   return (
-    <Container className={classes.PostCardContainer}>
-      <Link
-        style={{ textDecoration: "none" }}
-        to={{ pathname: "post/" + props.data.id }}
-      >
-        <Row className={classes.Link}>
-          {" "}
-          <h4>{props.data.link}</h4>{" "}
+    <Link
+      style={{ textDecoration: "none" }}
+      to={{ pathname: "post/" + props.data.id }}
+    >
+      <div className={classes.PostCardContainer}>
+        <div className={classes.Link}>
+          <span>{props.data.link}</span>
+        </div>
+        <div className={classes.Gauge}>
           <GaugeChart
-            className={classes.Gauge}
+            nrOfLevels={10}
+            colors={["red", "yellow", "green"]}
             textColor="black"
-            id="gauge-chart6"
             animate={true}
-            nrOfLevels={5}
             percent={props.data.ratingScore / 100}
             needleColor="#fff"
+            needleBaseColor="#fff"
+            hideText={true}
           />
-        </Row>
-      </Link>
-    </Container>
+        </div>
+      </div>
+    </Link>
   );
 };
 
