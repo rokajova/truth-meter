@@ -2,6 +2,7 @@
   max-height: 90vh;
   box-sizing: border-box;
   overflow: scroll;
+  margin: 10px;
 }
 .Container::-webkit-scrollbar {
   display: none;
@@ -11,5 +12,4 @@
   display: block;
   font-size: 2em;
   text-align: center;
-  margin: 5px 0;
 }

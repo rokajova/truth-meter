@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { Container, InputGroup, FormControl, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
 import ReactTags from "react-tag-autocomplete";
@@ -99,7 +99,7 @@ class NewPost extends Component {
       is_url(this.state.post.link) && this.state.post.title.length >= 1;
 
     return (
-      <div>
+      <Container>
         <InputGroup className="mb-3">
           <FormControl
             placeholder="Enter Title"
@@ -136,7 +136,7 @@ class NewPost extends Component {
         ) : (
           <Button disabled>Submit</Button>
         )}
-      </div>
+      </Container>
     );
   }
 }

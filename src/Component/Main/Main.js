@@ -113,13 +113,13 @@ class Main extends Component {
               return <PostCard key={index} data={post} />;
             })}
         </div>
-        {this.state.showLoading ? (
+        {/* {this.state.showLoading ? (
           <div className={classes.Loading}>
             <Spinner animation="grow" variant="light" />
           </div>
         ) : (
           ""
-        )}
+        )} */}
       </div>
     );
   }

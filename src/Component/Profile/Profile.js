@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import classes from "./Profile.module.css";
 
 const db = firebase.firestore();
 
@@ -28,28 +30,36 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <Container className={classes.Container}>
+        <Row>
+          {" "}
           {this.state.userData.userPosts && (
-            <div>
-              user posts:
+            <Col className={classes.Col}>
+              My posts
               {this.state.userData.userPosts.map((post) => (
-                <li>{post}</li>
-              ))}
-            </div>
-          )}
-          {this.state.userData.userPosts && (
-            <div>
-              user rates:
-              {this.state.userData.userRatesID.map((rate, i) => (
                 <li>
-                  {rate}, {this.state.userData.userRatesScore[i]}
+                  <Link to={"/post/" + post} className={classes.Link}>
+                    {post}
+                  </Link>
                 </li>
               ))}
-            </div>
+            </Col>
           )}
-        </div>
-      </div>
+          {this.state.userData.userPosts && (
+            <Col className={classes.Col}>
+              My rates:
+              {this.state.userData.userRatesID.map((rate, i) => (
+                <li>
+                  <Link to={"/post/" + rate} className={classes.Link}>
+                    {rate}
+                  </Link>{" "}
+                  rated as {this.state.userData.userRatesScore[i]}%
+                </li>
+              ))}
+            </Col>
+          )}
+        </Row>
+      </Container>
     );
   }
 }

@@ -1,0 +1,19 @@
+.Container {
+  text-align: center;
+  list-style-type: none;
+  color: #fff;
+  margin-top: 5%;
+}
+
+.Col {
+  border: 1px solid rgb(206, 223, 255);
+}
+
+.Link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.Link:hover {
+  color: #fff;
+}

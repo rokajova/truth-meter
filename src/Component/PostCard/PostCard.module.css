@@ -1,17 +1,11 @@
 .PostCardContainer {
   border: 1px solid rgb(206, 223, 255);
-  background: linear-gradient(
-    90deg,
-    rgb(61, 53, 131),
-    rgb(74, 72, 122),
-    rgba(61, 53, 131) 100%
-  );
+  background: linear-gradient(to right, rgb(76, 39, 177), rgb(103, 83, 175));
   text-align: center;
 }
 
 .PostCardContainer:hover {
-  background: linear-gradient(90deg, rgb(95, 83, 196), rgb(117, 115, 185) 100%);
-  transition: 0.5s;
+  background: rgb(76, 39, 177);
 }
 
 .Link {
