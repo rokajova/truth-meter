@@ -3,6 +3,7 @@ import { Container, InputGroup, FormControl, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
 import ReactTags from "react-tag-autocomplete";
+import classes from "./NewPost.module.css";
 
 const db = firebase.firestore();
 
@@ -95,48 +96,60 @@ class NewPost extends Component {
     }
 
     // Must return True in order to Submit a post
-    const SumbmitCondition =
-      is_url(this.state.post.link) && this.state.post.title.length >= 1;
+    const SumbmitCondition = is_url(this.state.post.link);
 
     return (
-      <Container>
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Enter Title"
-            aria-label="Enter Title"
-            aria-describedby="basic-addon1"
-            onChange={(e) => this.onChangePostTitle(e.target.value)}
-            value={this.state.post.title}
-          />
-        </InputGroup>
-
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Enter Link"
-            aria-label="Enter Link"
-            aria-describedby="basic-addon1"
+      <section className={classes.login}>
+        <div className={classes.loginContainer}>
+          <input
+            type="text"
+            placeholder="Enter a link..."
+            autoFocus
+            required
+            value={this.state.post.link}
             onChange={(e) => this.onChangePostLink(e.target.value)}
             value={this.state.post.link}
           />
-        </InputGroup>
+        </div>
+      </section>
+      // <Container>
+      //   {/* <InputGroup className="mb-3">
+      //     <FormControl
+      //       placeholder="Enter Title"
+      //       aria-label="Enter Title"
+      //       aria-describedby="basic-addon1"
+      //       onChange={(e) => this.onChangePostTitle(e.target.value)}
+      //       value={this.state.post.title}
+      //     />
+      //   </InputGroup> */}
 
-        <ReactTags
-          allowNew={true}
-          ref={this.reactTags}
-          tags={this.state.tags}
-          onDelete={this.onTagDelete.bind(this)}
-          onAddition={this.onTagAddition.bind(this)}
-          onValidate={this.onTagValidate.bind(this)}
-        />
+      //   <InputGroup className={classes.input}>
+      //     <FormControl
+      //       placeholder="Enter Link"
+      //       aria-label="Enter Link"
+      //       aria-describedby="basic-addon1"
+      //       onChange={(e) => this.onChangePostLink(e.target.value)}
+      //       value={this.state.post.link}
+      //     />
+      //   </InputGroup>
 
-        {SumbmitCondition ? (
-          <Button onClick={() => this.submitPost()} color="success">
-            Submit
-          </Button>
-        ) : (
-          <Button disabled>Submit</Button>
-        )}
-      </Container>
+      //   {/* <ReactTags
+      //     allowNew={true}
+      //     ref={this.reactTags}
+      //     tags={this.state.tags}
+      //     onDelete={this.onTagDelete.bind(this)}
+      //     onAddition={this.onTagAddition.bind(this)}
+      //     onValidate={this.onTagValidate.bind(this)}
+      //   /> */}
+
+      //   {SumbmitCondition ? (
+      //     <Button onClick={() => this.submitPost()} color="success">
+      //       Submit
+      //     </Button>
+      //   ) : (
+      //     <Button disabled>Submit</Button>
+      //   )}
+      // </Container>
     );
   }
 }

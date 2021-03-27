@@ -98,7 +98,7 @@ const Login = () => {
   return (
     <section className={classes.login}>
       <div className={classes.loginContainer}>
-        <label>UserName</label>
+        <label>E-mail</label>
         <input
           type="text"
           autoFocus
