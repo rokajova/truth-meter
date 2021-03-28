@@ -32,6 +32,12 @@ const Login = () => {
     setPasswordError("");
   };
 
+  // on click change between sign in and sign up, clear the inputs
+  const handleHasAccount = () => {
+    clearInputs();
+    setHasAccount(!hasAccount);
+  };
+
   // signs in with existing user if there are no errors described in the switch statement
   // if there are errors, set state with the corresponding error
   const handleLogin = () => {
@@ -98,18 +104,18 @@ const Login = () => {
   return (
     <section className={classes.login}>
       <div className={classes.loginContainer}>
-        <label>E-mail</label>
         <input
           type="text"
           autoFocus
           required
           value={email}
+          placeholder="E-mail"
           onChange={(e) => setEmail(e.target.value)}
         />
         <p className={classes.errorMsg}>{emailError}</p>
-        <label>Password</label>
         <input
           type="password"
+          placeholder="Password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -120,21 +126,21 @@ const Login = () => {
           {hasAccount ? (
             <div>
               <button className={classes.button} onClick={handleLogin}>
-                Sign In
+                Sign in
               </button>
               <p>
                 Don't have an account?
-                <span onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
+                <span onClick={handleHasAccount}>Sign up</span>
               </p>
             </div>
           ) : (
             <div>
               <button className={classes.button} onClick={handleSignup}>
-                Sign Up
+                Sign up
               </button>
               <p>
                 Have an account?
-                <span onClick={() => setHasAccount(!hasAccount)}>Sign In</span>
+                <span onClick={handleHasAccount}>Sign in</span>
               </p>
             </div>
           )}{" "}
