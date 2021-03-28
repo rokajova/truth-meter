@@ -98,29 +98,34 @@ class NewPost extends Component {
     const SumbmitCondition = is_url(this.state.post.link);
 
     return (
-      <section className={classes.login}>
-        <div className={classes.loginContainer}>
-          <input
-            type="text"
-            placeholder="Enter a link..."
-            autoFocus
-            required
-            value={this.state.post.link}
-            onChange={(e) => this.onChangePostLink(e.target.value)}
-            value={this.state.post.link}
-          />
-          {SumbmitCondition ? (
-            <button
-              className={classes.button}
-              onClick={() => this.submitPost()}
-            >
-              Submit
-            </button>
-          ) : (
-            <button className={classes.button} disabled>
-              Submit
-            </button>
-          )}
+      <section className={classes.NewPost}>
+        <div className={classes.NewPostContainer}>
+          <div>
+            {" "}
+            <input
+              type="text"
+              placeholder="Enter a link..."
+              autoFocus
+              required
+              value={this.state.post.link}
+              onChange={(e) => this.onChangePostLink(e.target.value)}
+              value={this.state.post.link}
+            />{" "}
+          </div>
+          <div className={classes.ButtonContainer}>
+            {SumbmitCondition ? (
+              <button
+                className={classes.button}
+                onClick={() => this.submitPost()}
+              >
+                Submit
+              </button>
+            ) : (
+              <button className={classes.button} disabled>
+                Submit
+              </button>
+            )}
+          </div>
         </div>
       </section>
     );
