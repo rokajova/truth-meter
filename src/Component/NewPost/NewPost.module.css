@@ -16,6 +16,13 @@
   transition: 250ms;
 }
 
+.button:disabled {
+  border: 1px solid #999999;
+  background-color: #8557571f;
+  color: #666666;
+  cursor: auto;
+}
+
 .login {
   margin: 100px 2%;
   display: flex;

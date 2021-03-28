@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, InputGroup, FormControl, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
 import ReactTags from "react-tag-autocomplete";
@@ -110,46 +109,20 @@ class NewPost extends Component {
             onChange={(e) => this.onChangePostLink(e.target.value)}
             value={this.state.post.link}
           />
+          {SumbmitCondition ? (
+            <button
+              className={classes.button}
+              onClick={() => this.submitPost()}
+            >
+              Submit
+            </button>
+          ) : (
+            <button className={classes.button} disabled>
+              Submit
+            </button>
+          )}
         </div>
       </section>
-      // <Container>
-      //   {/* <InputGroup className="mb-3">
-      //     <FormControl
-      //       placeholder="Enter Title"
-      //       aria-label="Enter Title"
-      //       aria-describedby="basic-addon1"
-      //       onChange={(e) => this.onChangePostTitle(e.target.value)}
-      //       value={this.state.post.title}
-      //     />
-      //   </InputGroup> */}
-
-      //   <InputGroup className={classes.input}>
-      //     <FormControl
-      //       placeholder="Enter Link"
-      //       aria-label="Enter Link"
-      //       aria-describedby="basic-addon1"
-      //       onChange={(e) => this.onChangePostLink(e.target.value)}
-      //       value={this.state.post.link}
-      //     />
-      //   </InputGroup>
-
-      //   {/* <ReactTags
-      //     allowNew={true}
-      //     ref={this.reactTags}
-      //     tags={this.state.tags}
-      //     onDelete={this.onTagDelete.bind(this)}
-      //     onAddition={this.onTagAddition.bind(this)}
-      //     onValidate={this.onTagValidate.bind(this)}
-      //   /> */}
-
-      //   {SumbmitCondition ? (
-      //     <Button onClick={() => this.submitPost()} color="success">
-      //       Submit
-      //     </Button>
-      //   ) : (
-      //     <Button disabled>Submit</Button>
-      //   )}
-      // </Container>
     );
   }
 }
