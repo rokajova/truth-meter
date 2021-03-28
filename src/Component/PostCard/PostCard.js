@@ -40,13 +40,15 @@ const PostCard = (props) => {
         <div className={classes.Gauge}>
           <GaugeChart
             nrOfLevels={10}
-            colors={["red", "yellow", "green"]}
-            textColor="black"
+            cornerRadius={1}
+            colors={["red", "yellow", "forestgreen"]}
+            arcWidth={0.3}
             animate={true}
             percent={props.data.ratingScore / 100}
             needleColor="#fff"
-            needleBaseColor="#fff"
+            needleBaseColor="rgb(206, 223, 255)"
             hideText={true}
+            animDelay={0}
           />
         </div>
       </div>
