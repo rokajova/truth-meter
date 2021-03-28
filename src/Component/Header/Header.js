@@ -37,7 +37,7 @@ class Header extends Component {
         {this.props.auth.isLoaded && (
           <nav className="NavbarItems">
             <Link to="/search">
-              <i className="fas fa-search mr-auto" />
+              <i className="fas fa-search ml-auto" />
             </Link>
             <div className="menu-icon" onClick={this.toggle}>
               <i
@@ -56,7 +56,7 @@ class Header extends Component {
                   &nbsp; <i className="fas fa-user mr-1" />
                   <span>LOG IN</span>
                 </Link>
-                <Link className="nav-links" to="/info">
+                <Link onClick={this.toggle} className="nav-links" to="/info">
                   &nbsp; <i className="fas fa-info mr-1" />
                   <span>INFO</span>
                 </Link>
@@ -67,21 +67,26 @@ class Header extends Component {
                   this.state.isClicked ? "nav-menu active" : "nav-menu"
                 }
               >
-                <Link className="nav-links" to="/new-post">
+                <Link
+                  onClick={this.toggle}
+                  className="nav-links"
+                  to="/new-post"
+                >
                   &nbsp; <i className="fas fa-plus mr-1" />
                   <span>NEW POST</span>
                 </Link>
-                <Link className="nav-links" to="/info">
+                <Link onClick={this.toggle} className="nav-links" to="/info">
                   &nbsp; <i className="fas fa-info mr-1" />
                   <span>INFO</span>
                 </Link>
-                <Link className="nav-links" to="/profile">
+                <Link onClick={this.toggle} className="nav-links" to="/profile">
                   &nbsp; <i className="fas fa-user mr-1" />
                   <span>PROFILE</span>
                 </Link>
                 <li
                   className="nav-links"
                   onClick={() => {
+                    this.toggle();
                     firebase.auth().signOut();
                   }}
                 >

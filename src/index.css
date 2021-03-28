@@ -9,8 +9,6 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-position: bottom;
-  min-height: 100%;
-  background-color: #e9ecec;
 }
 
 code {
