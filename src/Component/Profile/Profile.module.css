@@ -2,11 +2,13 @@
   text-align: center;
   list-style-type: none;
   color: #fff;
+  background: rgba(61, 53, 131, 0.9);
   margin-top: 5%;
 }
 
 .Col {
   border: 1px solid rgb(206, 223, 255);
+  padding: 0px !important;
 }
 
 .Link {
@@ -16,4 +18,9 @@
 
 .Link:hover {
   color: #fff;
+}
+
+.Title {
+  font-size: 1.5rem;
+  background-color: #6d76f7;
 }

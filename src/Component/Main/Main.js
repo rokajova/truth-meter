@@ -24,7 +24,7 @@ class Main extends Component {
     db.collection("Posts")
       .orderBy("createDate", "desc")
       .startAfter(this.state.lastPost.createDate)
-      .limit(5)
+      .limit(1)
       .get()
       .then((docs) => {
         if (!docs.empty) {
@@ -99,27 +99,25 @@ class Main extends Component {
 
   render() {
     return (
-      <div>
-        <div
-          className={classes.Container}
-          onScroll={() => this.handleScroll()}
-          ref={this.myDiv}
-        >
-          {" "}
-          {/* <Search /> */}
-          {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
-          {this.state.isLoaded &&
-            this.state.posts.map((post, index) => {
-              return <PostCard key={index} data={post} />;
-            })}
-        </div>
-        {/* {this.state.showLoading ? (
+      <div
+        className={classes.Container}
+        onScroll={() => this.handleScroll()}
+        ref={this.myDiv}
+      >
+        {" "}
+        {/* <Search /> */}
+        {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
+        {this.state.isLoaded &&
+          this.state.posts.map((post, index) => {
+            return <PostCard key={index} data={post} />;
+          })}
+        {this.state.showLoading ? (
           <div className={classes.Loading}>
             <Spinner animation="grow" variant="light" />
           </div>
         ) : (
           ""
-        )} */}
+        )}
       </div>
     );
   }

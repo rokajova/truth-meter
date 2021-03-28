@@ -1,9 +1,13 @@
 .Container {
-  max-height: 90vh;
   box-sizing: border-box;
   overflow: scroll;
-  margin: 10px;
+  margin: 10px auto;
+  padding: 20px;
+  max-height: 80vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
 .Container::-webkit-scrollbar {
   display: none;
 }

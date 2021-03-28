@@ -35,9 +35,13 @@ class Profile extends Component {
           {" "}
           {this.state.userData.userPosts && (
             <Col className={classes.Col}>
-              My posts
+              <div className={classes.Title}>My Posts</div>
               {this.state.userData.userPosts.map((post) => (
-                <li>
+                <li
+                  style={{
+                    borderTop: "1px solid  rgb(206, 223, 255)",
+                  }}
+                >
                   <Link to={"/post/" + post} className={classes.Link}>
                     {post}
                   </Link>
@@ -47,13 +51,17 @@ class Profile extends Component {
           )}
           {this.state.userData.userPosts && (
             <Col className={classes.Col}>
-              My rates:
+              <div className={classes.Title}>My Rates</div>
               {this.state.userData.userRatesID.map((rate, i) => (
-                <li>
+                <li
+                  style={{
+                    borderTop: "1px solid rgb(206, 223, 255)",
+                  }}
+                >
                   <Link to={"/post/" + rate} className={classes.Link}>
                     {rate}
                   </Link>{" "}
-                  rated as {this.state.userData.userRatesScore[i]}%
+                  rated as {this.state.userData.userRatesScore[i]}% true.
                 </li>
               ))}
             </Col>
