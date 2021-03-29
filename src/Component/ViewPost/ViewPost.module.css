@@ -15,7 +15,7 @@
 .iframe {
   width: 100%;
   border: none;
-  height: 70vh;
+  height: 75vh;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
 }
@@ -28,6 +28,7 @@
   position: relative;
   top: 4px;
   right: 3px;
+  cursor: pointer;
 }
 
 .Dots:after {
@@ -43,4 +44,24 @@
 .Dots:hover {
   background-color: #6d76f7;
   transition: 0.5s ease;
+}
+
+.MoreInfo {
+  color: #fff;
+  /* border-top: 1px solid #fff; */
+  background: rgb(74, 72, 122);
+  text-decoration: none;
+}
+
+.MoreInfoEl {
+  border-top: 1px solid #fff;
+  padding-left: 2%;
+  word-break: break-all;
+}
+
+a {
+  color: #fff;
+}
+a:hover {
+  color: rgb(167, 172, 243);
 }

@@ -92,7 +92,72 @@ class ViewPost extends Component {
             ></Button> */}
 
           <Collapse in={this.state.infoOpen}>
-            <div>info here</div>
+            <div className={classes.MoreInfo}>
+              <div className={classes.MoreInfoEl}>
+                <span
+                  style={{
+                    color: "lightblue",
+                  }}
+                >
+                  Created by :
+                </span>{" "}
+                {this.state.post.createUserName}
+              </div>
+              <div className={classes.MoreInfoEl}>
+                {" "}
+                <span
+                  style={{
+                    color: "lightblue",
+                  }}
+                >
+                  Date Posted :
+                </span>{" "}
+                {this.timeStampToString(this.state.post.createDate.seconds)}
+              </div>
+              <div className={classes.MoreInfoEl}>
+                <span
+                  style={{
+                    color: "lightblue",
+                  }}
+                >
+                  Full link :
+                </span>{" "}
+                <a href={this.state.post.link}>{this.state.post.link}</a>
+              </div>
+              {this.state.post.ratingScore ? (
+                <div className={classes.MoreInfoEl}>
+                  <span
+                    style={{
+                      color: "lightblue",
+                    }}
+                  >
+                    Truth score :
+                  </span>{" "}
+                  {this.state.post.ratingScore}%
+                </div>
+              ) : (
+                <div className={classes.MoreInfoEl}>
+                  <span
+                    style={{
+                      color: "lightblue",
+                    }}
+                  >
+                    Truth score :
+                  </span>{" "}
+                  This post has not been rated.
+                </div>
+              )}
+              <div className={classes.MoreInfoEl}>
+                <span
+                  style={{
+                    color: "lightblue",
+                  }}
+                >
+                  Total rated :
+                </span>{" "}
+                {this.state.post.rates.length}
+              </div>
+            </div>
           </Collapse>
 
           <iframe className={classes.iframe} src={link} />
