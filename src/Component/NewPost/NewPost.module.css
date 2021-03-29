@@ -69,6 +69,10 @@
   letter-spacing: 1px;
 }
 
+.NewPost .NewPostContainer input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
 .NewPost .NewPostContainer .btnContainer {
   width: 100%;
   padding: 24px 0;

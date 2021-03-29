@@ -38,15 +38,18 @@ class Search extends Component {
     const { query } = this.state;
 
     return (
-      <div className="container">
-        <InstantSearch indexName="Posts" searchClient={searchClient}>
-          <Configure hitsPerPage={5} />
-          <Autocomplete
-            onSuggestionSelected={this.onSuggestionSelected}
-            onSuggestionCleared={this.onSuggestionCleared}
-          />
-        </InstantSearch>
-      </div>
+      <section className="section">
+        {" "}
+        <div className="container">
+          <InstantSearch indexName="Posts" searchClient={searchClient}>
+            <Configure hitsPerPage={5} />
+            <Autocomplete
+              onSuggestionSelected={this.onSuggestionSelected}
+              onSuggestionCleared={this.onSuggestionCleared}
+            />
+          </InstantSearch>
+        </div>
+      </section>
     );
   }
 }

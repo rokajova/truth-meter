@@ -47,7 +47,7 @@ class AutoComplete extends Component {
     const { value } = this.state;
 
     const inputProps = {
-      placeholder: "Type in a link...",
+      placeholder: "Look up if a link has already been posted...",
       onChange: this.onChange,
       value,
     };

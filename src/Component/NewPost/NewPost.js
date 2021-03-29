@@ -104,7 +104,7 @@ class NewPost extends Component {
             {" "}
             <input
               type="text"
-              placeholder="Enter a link..."
+              placeholder="Enter a link and click Submit..."
               autoFocus
               required
               value={this.state.post.link}

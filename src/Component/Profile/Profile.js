@@ -40,6 +40,7 @@ class Profile extends Component {
                 <li
                   style={{
                     borderTop: "1px solid  rgb(206, 223, 255)",
+                    padding: "3px",
                   }}
                 >
                   <Link to={"/post/" + post} className={classes.Link}>
@@ -56,12 +57,13 @@ class Profile extends Component {
                 <li
                   style={{
                     borderTop: "1px solid rgb(206, 223, 255)",
+                    padding: "3px",
                   }}
                 >
                   <Link to={"/post/" + rate} className={classes.Link}>
                     {rate}
                   </Link>{" "}
-                  rated as {this.state.userData.userRatesScore[i]}% true.
+                  rated as {this.state.userData.userRatesScore[i]}%
                 </li>
               ))}
             </Col>
