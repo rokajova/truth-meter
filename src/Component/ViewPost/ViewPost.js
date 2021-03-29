@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Collapse, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
+import classes from "./ViewPost.module.css";
 
 const db = firebase.firestore();
 
@@ -76,29 +77,25 @@ class ViewPost extends Component {
       }
 
       return (
-        <div style={{ border: "1px solid black" }}>
-          <div>
-            <p style={{ display: "inline-block" }}>{this.state.post.link}</p>
-            <Button
-              style={{ display: "inline-block" }}
+        <div className={classes.ViewPostContainer}>
+          <span className={classes.Link}>{this.state.post.link}</span>
+          <span
+            onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
+            className={classes.Dots}
+          />
+
+          {/* <Button
+              // className={classes.Button}
               onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
               aria-controls="example-collapse-text"
               aria-expanded={this.state.infoOpen}
-            ></Button>
-            <Collapse in={this.state.infoOpen}>
-              <div id="example-collapse-text">info here</div>
-            </Collapse>
-          </div>
+            ></Button> */}
 
-          <iframe
-            src={link}
-            style={{
-              width: "100%",
-              height: "80vh",
-              border: "none",
-            }}
-          />
-          <button onClick={() => console.log(link)}>asd</button>
+          <Collapse in={this.state.infoOpen}>
+            <div>info here</div>
+          </Collapse>
+
+          <iframe className={classes.iframe} src={link} />
         </div>
       );
     } else {

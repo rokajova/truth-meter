@@ -31,12 +31,16 @@ class Header extends Component {
     });
   };
 
+  toggleDropDownOff = () => {
+    this.setState({ isClicked: false });
+  };
+
   render() {
     return (
       <div>
         {this.props.auth.isLoaded && (
           <nav className="NavbarItems">
-            <Link to="/search">
+            <Link to="/search" onClick={this.toggleDropDownOff}>
               <i className="fas fa-search ml-auto" />
             </Link>
             <div className="menu-icon" onClick={this.toggle}>
