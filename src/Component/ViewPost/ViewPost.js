@@ -153,7 +153,7 @@ class ViewPost extends Component {
                     color: "lightblue",
                   }}
                 >
-                  Total rated :
+                  Total rates :
                 </span>{" "}
                 {this.state.post.rates.length}
               </div>

@@ -1,0 +1,30 @@
+.RatePostContainer {
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.Gauge {
+  display: inline-block;
+}
+
+.RateThisPost {
+  background-color: #6d76f7;
+  border-radius: 10px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.RateThisPost:hover {
+  color: rgb(61, 53, 131);
+  background: #fff;
+  transition: 1s ease;
+}
+
+.RateModal {
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(61, 53, 131, 0.9),
+    rgba(24, 19, 73, 0.9)
+  );
+}

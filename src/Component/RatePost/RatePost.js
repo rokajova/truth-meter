@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import GaugeChart from "react-gauge-chart";
+import classes from "./RatePost.module.css";
 
 const db = firebase.firestore();
 
@@ -12,6 +13,7 @@ export default class RatePost extends Component {
     this.state = {
       hasLoaded: false,
       hasRated: false,
+      show: false,
       // posts ratingScore from firebase
       ratingScore: "",
       // current rate by user
@@ -115,60 +117,81 @@ export default class RatePost extends Component {
   render() {
     if (this.state.hasLoaded) {
       return (
-        <Container fluid>
-          <Row>
-            <Col sm={2}>
-              {" "}
-              <GaugeChart
-                style={{ width: 200 }}
-                id="gauge-chart6"
-                animate={true}
-                textColor="black"
-                nrOfLevels={15}
-                percent={this.state.ratingScore / 100}
-                needleColor="#345243"
-              />
-            </Col>
-            <Col sm={10}>
-              {this.props.auth.isEmpty ? (
-                <div>Please log in to rate this post</div>
-              ) : (
-                <div>
-                  {" "}
-                  {this.state.hasRated ? (
-                    <div>
-                      <p>You have already rated this post</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <Form>
-                        <Form.Group controlId="formBasicRange">
-                          <Form.Control
-                            type="range"
-                            value={this.state.rate}
-                            min="0"
-                            max="100"
-                            onChange={(e) =>
-                              this.onChangeRateInput(e.target.value)
-                            }
-                          />
-                        </Form.Group>
-                      </Form>
-
-                      <Button
-                        size="sm"
-                        color="success"
-                        onClick={() => this.onSubmit()}
-                      >
-                        Rate
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Col>
-          </Row>
-        </Container>
+        <div className={classes.RatePostContainer}>
+          <div className={classes.Gauge}>
+            {this.props.auth.isEmpty ? (
+              <span>Please log in to rate this post</span>
+            ) : (
+              <div>
+                {" "}
+                {this.state.hasRated ? (
+                  <div>
+                    <span>You have already rated this post</span>
+                  </div>
+                ) : (
+                  <div>
+                    <span
+                      onClick={() => {
+                        this.setState({ show: true });
+                      }}
+                      className={classes.RateThisPost}
+                    >
+                      Rate this post
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}{" "}
+            <GaugeChart
+              nrOfLevels={10}
+              cornerRadius={1}
+              colors={["red", "yellow", "forestgreen"]}
+              arcWidth={0.3}
+              animate={true}
+              percent={this.state.ratingScore / 100}
+              needleColor="#fff"
+              needleBaseColor="rgb(206, 223, 255)"
+              hideText={true}
+              animDelay={0}
+            />
+            <Modal
+              show={this.state.show}
+              onHide={() => {
+                this.setState({ show: false });
+              }}
+              centered={true}
+              size="lg"
+              className={classes.RateModal}
+            >
+              <Modal.Body className={classes.RateModal}>
+                <Form>
+                  <Form.Group controlId="formBasicRange">
+                    <Form.Control
+                      type="range"
+                      value={this.state.rate}
+                      min="0"
+                      max="100"
+                      onChange={(e) => this.onChangeRateInput(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
+                {this.state.rate ? (
+                  <Button
+                    size="sm"
+                    color="success"
+                    onClick={() => this.onSubmit()}
+                  >
+                    {this.state.rate}
+                  </Button>
+                ) : (
+                  <Button size="sm" color="success" disabled>
+                    Use the slider to rate
+                  </Button>
+                )}
+              </Modal.Body>
+            </Modal>
+          </div>
+        </div>
       );
     } else {
       return null;
