@@ -77,89 +77,83 @@ class ViewPost extends Component {
       }
 
       return (
-        <div className={classes.ViewPostContainer}>
-          <span className={classes.Link}>{this.state.post.link}</span>
-          <span
-            onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
-            className={classes.Dots}
-          />
-
-          {/* <Button
-              // className={classes.Button}
+        <div className={classes.ViePostContainer}>
+          <div>
+            {" "}
+            <span className={classes.Link}>{this.state.post.link}</span>
+            <span
               onClick={() => this.setState({ infoOpen: !this.state.infoOpen })}
-              aria-controls="example-collapse-text"
-              aria-expanded={this.state.infoOpen}
-            ></Button> */}
-
-          <Collapse in={this.state.infoOpen}>
-            <div className={classes.MoreInfo}>
-              <div className={classes.MoreInfoEl}>
-                <span
-                  style={{
-                    color: "lightblue",
-                  }}
-                >
-                  Created by :
-                </span>{" "}
-                {this.state.post.createUserName}
-              </div>
-              <div className={classes.MoreInfoEl}>
-                {" "}
-                <span
-                  style={{
-                    color: "lightblue",
-                  }}
-                >
-                  Date Posted :
-                </span>{" "}
-                {this.timeStampToString(this.state.post.createDate.seconds)}
-              </div>
-              <div className={classes.MoreInfoEl}>
-                <span
-                  style={{
-                    color: "lightblue",
-                  }}
-                >
-                  Full link :
-                </span>{" "}
-                <a href={this.state.post.link}>{this.state.post.link}</a>
-              </div>
-              {this.state.post.ratingScore ? (
+              className={classes.Dots}
+            />
+            <Collapse in={this.state.infoOpen}>
+              <div className={classes.MoreInfo}>
                 <div className={classes.MoreInfoEl}>
                   <span
                     style={{
                       color: "lightblue",
                     }}
                   >
-                    Truth score :
+                    Created by :
                   </span>{" "}
-                  {this.state.post.ratingScore}%
+                  {this.state.post.createUserName}
                 </div>
-              ) : (
+                <div className={classes.MoreInfoEl}>
+                  {" "}
+                  <span
+                    style={{
+                      color: "lightblue",
+                    }}
+                  >
+                    Date Posted :
+                  </span>{" "}
+                  {this.timeStampToString(this.state.post.createDate.seconds)}
+                </div>
                 <div className={classes.MoreInfoEl}>
                   <span
                     style={{
                       color: "lightblue",
                     }}
                   >
-                    Truth score :
+                    Full link :
                   </span>{" "}
-                  This post has not been rated.
+                  <a href={this.state.post.link}>{this.state.post.link}</a>
                 </div>
-              )}
-              <div className={classes.MoreInfoEl}>
-                <span
-                  style={{
-                    color: "lightblue",
-                  }}
-                >
-                  Total rates :
-                </span>{" "}
-                {this.state.post.rates.length}
+                {this.state.post.ratingScore ? (
+                  <div className={classes.MoreInfoEl}>
+                    <span
+                      style={{
+                        color: "lightblue",
+                      }}
+                    >
+                      Truth score :
+                    </span>{" "}
+                    {this.state.post.ratingScore}%
+                  </div>
+                ) : (
+                  <div className={classes.MoreInfoEl}>
+                    <span
+                      style={{
+                        color: "lightblue",
+                      }}
+                    >
+                      Truth score :
+                    </span>{" "}
+                    This post has not been rated.
+                  </div>
+                )}
+                <div className={classes.MoreInfoEl}>
+                  <span
+                    style={{
+                      color: "lightblue",
+                    }}
+                  >
+                    Total rates :
+                  </span>{" "}
+                  {this.state.post.rates.length}
+                </div>
               </div>
-            </div>
-          </Collapse>
-
+            </Collapse>
+          </div>{" "}
           <iframe className={classes.iframe} src={link} />
         </div>
       );

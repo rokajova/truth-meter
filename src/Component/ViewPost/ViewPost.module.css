@@ -8,14 +8,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
-  width: 100%;
   width: 85%;
 }
 
 .iframe {
   width: 100%;
+  height: calc(90vh - 84px);
   border: none;
-  height: 80vh;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
 }
