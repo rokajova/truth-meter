@@ -4,10 +4,6 @@
   font-size: 1rem;
 }
 
-.Gauge {
-  display: inline-block;
-}
-
 /* Rate this post button outside modal */
 .RateThisPost {
   background-color: #6d76f7;

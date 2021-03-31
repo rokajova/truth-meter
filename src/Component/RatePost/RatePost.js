@@ -119,30 +119,69 @@ export default class RatePost extends Component {
     if (this.state.hasLoaded) {
       return (
         <div className={classes.RatePostContainer}>
-          <div className={classes.Gauge}>
-            {this.props.auth.isEmpty ? (
-              <span>Please log in to rate this post</span>
-            ) : (
-              <div>
-                {" "}
-                {this.state.hasRated ? (
-                  <div>
-                    <span>You have already rated this post</span>
-                  </div>
+          {this.props.auth.isEmpty ? (
+            <span>Please log in to rate this post</span>
+          ) : (
+            <div>
+              {" "}
+              {this.state.hasRated ? (
+                <div>
+                  <span>You have already rated this post</span>
+                </div>
+              ) : (
+                <div>
+                  <span
+                    onClick={() => {
+                      this.setState({ show: true });
+                    }}
+                    className={classes.RateThisPost}
+                  >
+                    Rate this post
+                  </span>
+                </div>
+              )}
+            </div>
+          )}{" "}
+          <Modal
+            show={this.state.show}
+            onHide={() => {
+              this.setState({ show: false });
+            }}
+            centered={true}
+            size="lg"
+            className={classes.RateModal}
+          >
+            <Modal.Body className={classes.RateModalBody}>
+              <Form>
+                <Form.Group controlId="formBasicRange">
+                  <Form.Control
+                    color="success"
+                    type="range"
+                    value={this.state.rate}
+                    min="0"
+                    max="100"
+                    onChange={(e) => this.onChangeRateInput(e.target.value)}
+                  />
+                </Form.Group>
+              </Form>
+              <div style={{ textAlign: "center" }}>
+                {this.state.rate ? (
+                  <button
+                    className={classes.button}
+                    onClick={() => this.onSubmit()}
+                  >
+                    Rate this post as {this.state.rate}%
+                  </button>
                 ) : (
-                  <div>
-                    <span
-                      onClick={() => {
-                        this.setState({ show: true });
-                      }}
-                      className={classes.RateThisPost}
-                    >
-                      Rate this post
-                    </span>
-                  </div>
+                  <button className={classes.button} disabled>
+                    Use the slider to rate
+                  </button>
                 )}
               </div>
-            )}{" "}
+            </Modal.Body>
+          </Modal>
+          <div className={classes.Gauge}>
+            {" "}
             <GaugeChart
               nrOfLevels={10}
               cornerRadius={1}
@@ -155,44 +194,6 @@ export default class RatePost extends Component {
               hideText={true}
               animDelay={0}
             />
-            <Modal
-              show={this.state.show}
-              onHide={() => {
-                this.setState({ show: false });
-              }}
-              centered={true}
-              size="lg"
-              className={classes.RateModal}
-            >
-              <Modal.Body className={classes.RateModalBody}>
-                <Form>
-                  <Form.Group controlId="formBasicRange">
-                    <Form.Control
-                      color="success"
-                      type="range"
-                      value={this.state.rate}
-                      min="0"
-                      max="100"
-                      onChange={(e) => this.onChangeRateInput(e.target.value)}
-                    />
-                  </Form.Group>
-                </Form>
-                <div style={{ textAlign: "center" }}>
-                  {this.state.rate ? (
-                    <button
-                      className={classes.button}
-                      onClick={() => this.onSubmit()}
-                    >
-                      Rate this post as {this.state.rate}%
-                    </button>
-                  ) : (
-                    <button className={classes.button} disabled>
-                      Use the slider to rate
-                    </button>
-                  )}
-                </div>
-              </Modal.Body>
-            </Modal>
           </div>
         </div>
       );

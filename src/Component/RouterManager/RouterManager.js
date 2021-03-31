@@ -85,10 +85,10 @@ class RouterManager extends Component {
               component={AdminOnly(ViewPost, this.props.auth)}
             />
 
-            {/* <Route
+            <Route
               path="/post/:id"
               component={AdminOnly(RatePost, this.props.auth)}
-            /> */}
+            />
           </Route>
 
           {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
