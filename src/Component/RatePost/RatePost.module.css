@@ -8,6 +8,7 @@
   display: inline-block;
 }
 
+/* Rate this post button outside modal */
 .RateThisPost {
   background-color: #6d76f7;
   border-radius: 10px;
@@ -21,10 +22,46 @@
   transition: 1s ease;
 }
 
+/* Modal */
 .RateModal {
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(61, 53, 131, 0.3),
+    rgba(24, 19, 73, 0.3)
+  );
+}
+.RateModalBody {
   background: radial-gradient(
     ellipse at bottom,
     rgba(61, 53, 131, 0.9),
     rgba(24, 19, 73, 0.9)
   );
+}
+
+/* Rate button in the modal */
+
+.button {
+  border: none;
+  outline: none;
+  width: 200px;
+  padding: 8px 0;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: #007bff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+.button:hover {
+  transition: all 0.3s ease-out;
+  background: #fff;
+  color: #007bff;
+  transition: 250ms;
+  border: 1px solid #007bff;
+}
+
+.button:disabled {
+  background-color: #8557571f;
+  color: #fff;
+  cursor: auto;
 }

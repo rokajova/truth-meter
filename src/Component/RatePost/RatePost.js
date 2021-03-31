@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
+import { ButtonGroup, Form, Modal } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import GaugeChart from "react-gauge-chart";
 import classes from "./RatePost.module.css";
@@ -105,6 +105,7 @@ export default class RatePost extends Component {
 
   // submit rate to firebase with all the necessary updates
   onSubmit = () => {
+    this.setState({ show: false });
     this.updateUsersCol();
     this.updatePostsCol();
   };
@@ -163,10 +164,11 @@ export default class RatePost extends Component {
               size="lg"
               className={classes.RateModal}
             >
-              <Modal.Body className={classes.RateModal}>
+              <Modal.Body className={classes.RateModalBody}>
                 <Form>
                   <Form.Group controlId="formBasicRange">
                     <Form.Control
+                      color="success"
                       type="range"
                       value={this.state.rate}
                       min="0"
@@ -175,19 +177,20 @@ export default class RatePost extends Component {
                     />
                   </Form.Group>
                 </Form>
-                {this.state.rate ? (
-                  <Button
-                    size="sm"
-                    color="success"
-                    onClick={() => this.onSubmit()}
-                  >
-                    {this.state.rate}
-                  </Button>
-                ) : (
-                  <Button size="sm" color="success" disabled>
-                    Use the slider to rate
-                  </Button>
-                )}
+                <div style={{ textAlign: "center" }}>
+                  {this.state.rate ? (
+                    <button
+                      className={classes.button}
+                      onClick={() => this.onSubmit()}
+                    >
+                      Rate this post as {this.state.rate}%
+                    </button>
+                  ) : (
+                    <button className={classes.button} disabled>
+                      Use the slider to rate
+                    </button>
+                  )}
+                </div>
               </Modal.Body>
             </Modal>
           </div>
