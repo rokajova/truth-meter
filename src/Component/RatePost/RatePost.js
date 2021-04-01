@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ButtonGroup, Form, Modal } from "react-bootstrap";
 import firebase from "../../Config/firebase";
-import GaugeChart from "react-gauge-chart";
 import classes from "./RatePost.module.css";
 
 const db = firebase.firestore();
@@ -119,28 +118,18 @@ export default class RatePost extends Component {
     if (this.state.hasLoaded) {
       return (
         <div className={classes.RatePostContainer}>
-          <div className={classes.Gauge}>
-            <GaugeChart
-              nrOfLevels={10}
-              cornerRadius={1}
-              colors={["red", "yellow", "forestgreen"]}
-              arcWidth={0.3}
-              animate={true}
-              percent={this.state.ratingScore / 100}
-              needleColor="#fff"
-              needleBaseColor="rgb(206, 223, 255)"
-              hideText={true}
-              animDelay={0}
-            />
-          </div>
           {this.props.auth.isEmpty ? (
-            <span>Please log in to rate this post</span>
+            <span className={classes.RateThisPostUnclickable}>
+              Please log in to rate this post
+            </span>
           ) : (
             <div>
               {" "}
               {this.state.hasRated ? (
                 <div>
-                  <span>You have already rated this post</span>
+                  <span className={classes.RateThisPostUnclickable}>
+                    You have already rated this post
+                  </span>
                 </div>
               ) : (
                 <div>

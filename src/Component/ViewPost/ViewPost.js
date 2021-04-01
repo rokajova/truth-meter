@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Collapse, Button } from "react-bootstrap";
+import Collapse from "react-bootstrap/Collapse";
 import firebase from "../../Config/firebase";
 import classes from "./ViewPost.module.css";
+import GaugeChart from "react-gauge-chart";
 
 const db = firebase.firestore();
 
@@ -77,7 +78,7 @@ class ViewPost extends Component {
       }
 
       return (
-        <div className={classes.ViePostContainer}>
+        <div>
           <div>
             {" "}
             <span className={classes.Link}>{this.state.post.link}</span>
@@ -154,7 +155,23 @@ class ViewPost extends Component {
               </div>
             </Collapse>
           </div>
-          <iframe className={classes.iframe} src={link} />
+          <div className={classes.iframeContainer}>
+            <div className={classes.Gauge}>
+              <GaugeChart
+                nrOfLevels={10}
+                cornerRadius={1}
+                colors={["red", "yellow", "forestgreen"]}
+                arcWidth={0.3}
+                animate={true}
+                percent={this.state.post.ratingScore / 100}
+                needleColor="#fff"
+                needleBaseColor="rgb(206, 223, 255)"
+                hideText={true}
+                animDelay={0}
+              />
+            </div>
+            <iframe className={classes.iframe} src={link} />
+          </div>
         </div>
       );
     } else {
