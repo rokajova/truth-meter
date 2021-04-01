@@ -4,6 +4,9 @@
   margin: 10px auto;
   padding: 20px;
   max-height: 80vh;
+  width: 50%;
+  border: 1px solid #fff;
+  background-color: khaki;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

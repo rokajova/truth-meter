@@ -104,8 +104,6 @@ class Main extends Component {
         onScroll={() => this.handleScroll()}
         ref={this.myDiv}
       >
-        {" "}
-        {/* <Search /> */}
         {/* Once the posts array is populated, return the elements in the array as PostCard component with props */}
         {this.state.isLoaded &&
           this.state.posts.map((post, index) => {
