@@ -13,10 +13,10 @@
 
 .iframe {
   width: 100%;
-  height: calc(90vh - 84px);
+  height: calc(100vh - 120px);
   border: none;
   border-top: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  /* border-bottom: 2px solid #fff; */
 }
 
 .Dots {

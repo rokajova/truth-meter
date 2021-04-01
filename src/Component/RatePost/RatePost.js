@@ -119,6 +119,20 @@ export default class RatePost extends Component {
     if (this.state.hasLoaded) {
       return (
         <div className={classes.RatePostContainer}>
+          <div className={classes.Gauge}>
+            <GaugeChart
+              nrOfLevels={10}
+              cornerRadius={1}
+              colors={["red", "yellow", "forestgreen"]}
+              arcWidth={0.3}
+              animate={true}
+              percent={this.state.ratingScore / 100}
+              needleColor="#fff"
+              needleBaseColor="rgb(206, 223, 255)"
+              hideText={true}
+              animDelay={0}
+            />
+          </div>
           {this.props.auth.isEmpty ? (
             <span>Please log in to rate this post</span>
           ) : (
@@ -137,11 +151,12 @@ export default class RatePost extends Component {
                     className={classes.RateThisPost}
                   >
                     Rate this post
-                  </span>
+                  </span>{" "}
                 </div>
               )}
             </div>
-          )}{" "}
+          )}
+
           <Modal
             show={this.state.show}
             onHide={() => {
@@ -180,21 +195,6 @@ export default class RatePost extends Component {
               </div>
             </Modal.Body>
           </Modal>
-          <div className={classes.Gauge}>
-            {" "}
-            <GaugeChart
-              nrOfLevels={10}
-              cornerRadius={1}
-              colors={["red", "yellow", "forestgreen"]}
-              arcWidth={0.3}
-              animate={true}
-              percent={this.state.ratingScore / 100}
-              needleColor="#fff"
-              needleBaseColor="rgb(206, 223, 255)"
-              hideText={true}
-              animDelay={0}
-            />
-          </div>
         </div>
       );
     } else {

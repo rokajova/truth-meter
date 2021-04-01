@@ -4,6 +4,23 @@
   font-size: 1rem;
 }
 
+.Gauge {
+  max-width: 250px;
+  width: 30%;
+  background: linear-gradient(
+    90deg,
+    rgb(61, 53, 131, 0.9),
+    rgb(74, 72, 129, 0.9),
+    rgba(61, 53, 131, 0.9) 100%
+  );
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-top-right-radius: 10px;
+  position: fixed;
+  bottom: 0;
+  transform: translateY(-36px);
+}
+
 /* Rate this post button outside modal */
 .RateThisPost {
   background-color: #6d76f7;

@@ -153,7 +153,7 @@ class ViewPost extends Component {
                 </div>
               </div>
             </Collapse>
-          </div>{" "}
+          </div>
           <iframe className={classes.iframe} src={link} />
         </div>
       );
