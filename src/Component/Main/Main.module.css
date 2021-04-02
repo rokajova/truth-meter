@@ -1,22 +1,41 @@
 .Container {
   box-sizing: border-box;
   overflow: scroll;
-  margin: 10px auto;
-  padding: 20px;
-  max-height: 80vh;
-  width: 50%;
-  border: 1px solid #fff;
-  background-color: khaki;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  margin: 20px auto;
+  width: 80%;
+  /* border: 1px solid #fff; */
+  /* disable scrollbar for all browsers */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .Container::-webkit-scrollbar {
   display: none;
 }
 
-.Loading {
-  display: block;
-  font-size: 2em;
+.ShowMore {
   text-align: center;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.DownArrow {
+  background-color: #6d76f7;
+  padding: 1px 4px 0px 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.5s ease-in-out;
+}
+
+.DownArrow:hover {
+  color: rgb(61, 53, 131);
+  background: #fff;
+}
+
+.DownArrowDisabled {
+  border: 1px solid #6d76f7;
+  border-radius: 12px;
+  font-size: 20px;
+  padding: 1px 4px 0px 4px;
 }
