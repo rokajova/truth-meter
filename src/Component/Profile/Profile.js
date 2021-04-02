@@ -30,11 +30,10 @@ class Profile extends Component {
 
   render() {
     return (
-      <Container className={classes.Container}>
-        <Row>
-          {" "}
+      <div className={classes.Container}>
+        <div className={classes.Row}>
           {this.state.userData.userPosts && (
-            <Col className={classes.Col}>
+            <div className={classes.Col}>
               <div className={classes.Title}>My Posts</div>
               {this.state.userData.userPosts.map((post) => (
                 <li
@@ -48,10 +47,10 @@ class Profile extends Component {
                   </Link>
                 </li>
               ))}
-            </Col>
+            </div>
           )}
           {this.state.userData.userPosts && (
-            <Col className={classes.Col}>
+            <div className={classes.Col}>
               <div className={classes.Title}>My Rates</div>
               {this.state.userData.userRatesID.map((rate, i) => (
                 <li
@@ -66,10 +65,10 @@ class Profile extends Component {
                   rated as {this.state.userData.userRatesScore[i]}%
                 </li>
               ))}
-            </Col>
+            </div>
           )}
-        </Row>
-      </Container>
+        </div>
+      </div>
     );
   }
 }

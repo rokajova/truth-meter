@@ -117,7 +117,9 @@ class ViewPost extends Component {
                   >
                     Full link :
                   </span>{" "}
-                  <a href={this.state.post.link}>{this.state.post.link}</a>
+                  <a href={this.state.post.link} target="_blank">
+                    {this.state.post.link}
+                  </a>
                 </div>
                 {this.state.post.ratingScore ? (
                   <div className={classes.MoreInfoEl}>

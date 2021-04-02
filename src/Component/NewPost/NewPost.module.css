@@ -28,8 +28,11 @@
 }
 
 .NewPost {
-  margin: 20% 4%;
-  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 50px));
+  width: 90%;
 }
 
 .NewPost .NewPostContainer {

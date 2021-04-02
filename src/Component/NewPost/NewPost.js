@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
-import ReactTags from "react-tag-autocomplete";
 import classes from "./NewPost.module.css";
 
 const db = firebase.firestore();
