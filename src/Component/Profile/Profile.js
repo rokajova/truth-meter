@@ -33,7 +33,7 @@ class Profile extends Component {
         <div className={classes.Row}>
           {this.state.userData.userPosts && (
             <div className={classes.Col}>
-              <div className={classes.Title}>My Info</div>
+              <div className={classes.Title}>Profile</div>
               <span
                 style={{
                   borderTop: "1px solid  rgb(206, 223, 255)",
@@ -48,9 +48,9 @@ class Profile extends Component {
                   padding: "3px",
                 }}
               >
-                Display name:{" "}
+                Current display name:{" "}
                 {firebase.auth().currentUser.displayName ? (
-                  firebase.auth().currentUser.displayName
+                  <i>{firebase.auth().currentUser.displayName}</i>
                 ) : (
                   <i style={{ color: "lightgrey" }}>anonymous</i>
                 )}

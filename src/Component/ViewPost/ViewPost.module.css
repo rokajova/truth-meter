@@ -50,6 +50,7 @@
   top: 4px;
   right: 3px;
   cursor: pointer;
+  transition: 0.5s ease;
 }
 
 .Dots:after {
@@ -64,7 +65,6 @@
 
 .Dots:hover {
   background-color: #6d76f7;
-  transition: 0.5s ease;
 }
 
 .MoreInfo {
