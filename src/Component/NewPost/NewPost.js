@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import { withRouter } from "react-router-dom";
 import classes from "./NewPost.module.css";
+import Recaptcha from "react-recaptcha";
 
 const db = firebase.firestore();
 
@@ -9,7 +10,11 @@ class NewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // change this to false and add the porper URL in the recapcha dashboard once I golive
+      isCaptchaVerified: true,
+
       tags: [],
+
       post: {
         title: "",
         link: "",
@@ -62,6 +67,22 @@ class NewPost extends Component {
     });
   };
 
+  //recaptcha verify
+  verifyCallback(response) {
+    if (response) {
+      this.setState({
+        isCaptchaVerified: true,
+      });
+    }
+  }
+
+  //recaptcha expired
+  expiredCallback() {
+    this.setState({
+      isCaptchaVerified: false,
+    });
+  }
+
   //add doc to Posts collection, then redirect to home
   submitPost() {
     // get user reference
@@ -94,7 +115,8 @@ class NewPost extends Component {
     }
 
     // Must return True in order to Submit a post
-    const SumbmitCondition = is_url(this.state.post.link);
+    const SumbmitCondition =
+      is_url(this.state.post.link) && this.state.isCaptchaVerified;
 
     return (
       <section className={classes.NewPost}>
@@ -111,6 +133,16 @@ class NewPost extends Component {
               value={this.state.post.link}
             />{" "}
           </div>
+          <div className={classes.Recaptcha}>
+            {" "}
+            <Recaptcha
+              sitekey="6LdqLJoaAAAAAFRLwSy6kLGzasP9ChtQQnIIo554"
+              render="explicit"
+              verifyCallback={this.verifyCallback}
+              expiredCallback={this.expiredCallback}
+            />
+          </div>
+
           <div className={classes.ButtonContainer}>
             {SumbmitCondition ? (
               <button
