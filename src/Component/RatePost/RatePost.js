@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ButtonGroup, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import firebase from "../../Config/firebase";
 import classes from "./RatePost.module.css";
 
@@ -120,7 +120,7 @@ export default class RatePost extends Component {
         <div className={classes.RatePostContainer}>
           {this.props.auth.isEmpty ? (
             <span className={classes.RateThisPostUnclickable}>
-              Please log in to rate this post
+              Log in to rate this post
             </span>
           ) : (
             <div>

@@ -90,7 +90,9 @@ class NewPost extends Component {
 
     const post = this.state.post;
     post.createUserID = this.props.auth.uid;
-    post.createUserName = this.props.auth.displayName;
+    // a temp workaround to the signup problem, where I cannot update the display name on the firebase signup function
+    // (see top commentin Signup component for detailed explanation)
+    post.createUserName = firebase.auth().currentUser.displayName;
     post.tags = this.state.tags;
     db.collection("Posts")
       .add(post)

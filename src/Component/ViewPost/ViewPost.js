@@ -96,7 +96,11 @@ class ViewPost extends Component {
                   >
                     Created by :
                   </span>{" "}
-                  {this.state.post.createUserName}
+                  {this.state.post.createUserName ? (
+                    this.state.post.createUserName
+                  ) : (
+                    <i style={{ color: "lightgrey" }}>anonymous</i>
+                  )}
                 </div>
                 <div className={classes.MoreInfoEl}>
                   {" "}

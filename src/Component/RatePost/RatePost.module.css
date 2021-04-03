@@ -17,12 +17,12 @@
   border-radius: 10px;
   padding: 4px;
   cursor: pointer;
+  transition: 1s ease;
 }
 
 .RateThisPost:hover {
   color: rgb(61, 53, 131);
   background: #fff;
-  transition: 1s ease;
 }
 
 /* Modal */

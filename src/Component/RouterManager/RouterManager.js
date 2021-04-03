@@ -5,6 +5,8 @@ import Main from "../Main/Main";
 import ViewPost from "../ViewPost/ViewPost";
 import NewPost from "../NewPost/NewPost";
 import Login from "../Login/Login";
+import Signup from "../Login/Signup";
+import Reset from "../Login/Reset";
 import RatePost from "../RatePost/RatePost";
 import Profile from "../Profile/Profile";
 import Search from "../Search/Search";
@@ -62,6 +64,28 @@ class RouterManager extends Component {
           ) : (
             <div></div>
           )}
+          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/signup"
+              component={AdminOnly(Signup, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
+          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/forgot-password"
+              component={AdminOnly(Reset, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
 
           <Route path="/search">
             <Search />
@@ -97,7 +121,7 @@ class RouterManager extends Component {
               path="/new-post"
               component={AdminOnly(NewPost, this.props.auth)}
               isAuth={!this.props.auth.isEmpty}
-              redirectpathname="/login"
+              redirectpathname="/user"
             />
           ) : (
             <div></div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import { withRouter, Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
 import classes from "./Profile.module.css";
 
 const db = firebase.firestore();
@@ -31,6 +30,34 @@ class Profile extends Component {
   render() {
     return (
       <div className={classes.Container}>
+        <div className={classes.Row}>
+          {this.state.userData.userPosts && (
+            <div className={classes.Col}>
+              <div className={classes.Title}>My Info</div>
+              <span
+                style={{
+                  borderTop: "1px solid  rgb(206, 223, 255)",
+                  padding: "3px",
+                }}
+              >
+                Email: {this.props.auth.email}
+              </span>
+              <span
+                style={{
+                  borderTop: "1px solid  rgb(206, 223, 255)",
+                  padding: "3px",
+                }}
+              >
+                Display name:{" "}
+                {firebase.auth().currentUser.displayName ? (
+                  firebase.auth().currentUser.displayName
+                ) : (
+                  <i style={{ color: "lightgrey" }}>anonymous</i>
+                )}
+              </span>
+            </div>
+          )}
+        </div>
         <div className={classes.Row}>
           {this.state.userData.userPosts && (
             <div className={classes.Col}>

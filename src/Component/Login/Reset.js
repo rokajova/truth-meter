@@ -5,13 +5,13 @@ import firebase from "../../Config/firebase";
 import classes from "./Login.module.css";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Reset = () => {
   // required states for authentication
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [message, setMessage] = useState("");
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
   // config for google authentication
   const uiConfig = {
@@ -23,22 +23,24 @@ const Login = () => {
   // clears login and signin state
   const clearInputs = () => {
     setEmail("");
-    setPassword("");
   };
-
   // clears errors state
   const clearErrors = () => {
     setEmailError("");
-    setPasswordError("");
   };
 
   // signs in with existing user if there are no errors described in the switch statement
   // if there are errors, set state with the corresponding error
-  const handleLogin = () => {
+  async function handleReset() {
     clearErrors();
-    firebase
+    setMessage("");
+    await firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .sendPasswordResetEmail(email)
+      .then(function () {
+        setMessage("Check your inbox for further steps");
+        setBtnDisabled(true);
+      })
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
@@ -46,12 +48,9 @@ const Login = () => {
           case "auth/user-not-found":
             setEmailError(err.message);
             break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
         }
       });
-  };
+  }
 
   // checks for auth state changes, set state accordingly
   const authListener = () => {
@@ -81,32 +80,32 @@ const Login = () => {
           placeholder="E-mail"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <p className={classes.errorMsg}>{emailError}</p>
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className={classes.errorMsg}>{passwordError}</p>
+
+        {emailError && <p className={classes.errorMsg}>{emailError}</p>}
+        {message && <p className={classes.successMsg}>{message}</p>}
+
         <div className={classes.btnContainer}>
           {" "}
           <div>
-            <button className={classes.button} onClick={handleLogin}>
-              Log in
+            <button
+              disabled={btnDisabled}
+              className={classes.button}
+              onClick={handleReset}
+            >
+              Reset password
             </button>
+            <p>
+              Have an account?
+              <Link style={{ textDecoration: "none" }} to="/login">
+                {" "}
+                <span>Log in</span>
+              </Link>
+            </p>
             <p>
               Don't have an account?
               <Link style={{ textDecoration: "none" }} to="/signup">
                 {" "}
                 <span>Sign up</span>
-              </Link>
-            </p>
-            <p>
-              Forgot password?
-              <Link style={{ textDecoration: "none" }} to="/forgot-password">
-                <span>Reset password</span>
               </Link>
             </p>
           </div>
@@ -125,4 +124,4 @@ const enhance = connect(({ firebase: { auth, profile } }) => ({
   profile,
 }));
 
-export default enhance(Login);
+export default enhance(Reset);

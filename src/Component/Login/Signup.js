@@ -5,11 +5,20 @@ import firebase from "../../Config/firebase";
 import classes from "./Login.module.css";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+// The createUserWithEmailAndPassword and cloud functions don't work well with eachother.
+// Since I'm using a function to create a document with created users each time a createUserWithEmailAndPassword fire
+// the cloud function does not pick up the the promise function to create a display name and while it does create a display name, which can be accessed under
+// "firebase.auth().currentUser.displayName" the document in the Users collection does not update accordingly.
+// https://stackoverflow.com/questions/40389946/how-do-i-set-the-displayname-of-firebase-user/40429080 <- does not solve the cloud function issue, but does change the display name
+// https://stackoverflow.com/questions/48741932/firebase-authfunctions-create-user-with-displayname <- might solve the isuue, will come back to it later on.
+
+const Signup = () => {
   // required states for authentication
   const [user, setUser] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -32,21 +41,20 @@ const Login = () => {
     setPasswordError("");
   };
 
-  // signs in with existing user if there are no errors described in the switch statement
+  // signs up a new user if there are no errors described in the switch statement
   // if there are errors, set state with the corresponding error
-  const handleLogin = () => {
+  const handleSignup = () => {
     clearErrors();
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .catch((err) => {
         switch (err.code) {
+          case "auth/email-already-in-use":
           case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
             setEmailError(err.message);
             break;
-          case "auth/wrong-password":
+          case "auth/weak-password":
             setPasswordError(err.message);
             break;
         }
@@ -90,23 +98,18 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <p className={classes.errorMsg}>{passwordError}</p>
+
         <div className={classes.btnContainer}>
           {" "}
           <div>
-            <button className={classes.button} onClick={handleLogin}>
-              Log in
+            <button className={classes.button} onClick={handleSignup}>
+              Sign up
             </button>
             <p>
-              Don't have an account?
-              <Link style={{ textDecoration: "none" }} to="/signup">
+              Have an account?
+              <Link style={{ textDecoration: "none" }} to="login">
                 {" "}
-                <span>Sign up</span>
-              </Link>
-            </p>
-            <p>
-              Forgot password?
-              <Link style={{ textDecoration: "none" }} to="/forgot-password">
-                <span>Reset password</span>
+                <span>Log in</span>
               </Link>
             </p>
           </div>
@@ -125,4 +128,4 @@ const enhance = connect(({ firebase: { auth, profile } }) => ({
   profile,
 }));
 
-export default enhance(Login);
+export default enhance(Signup);
