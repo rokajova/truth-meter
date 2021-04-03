@@ -121,7 +121,7 @@ class RouterManager extends Component {
               path="/new-post"
               component={AdminOnly(NewPost, this.props.auth)}
               isAuth={!this.props.auth.isEmpty}
-              redirectpathname="/user"
+              redirectpathname="/login"
             />
           ) : (
             <div></div>

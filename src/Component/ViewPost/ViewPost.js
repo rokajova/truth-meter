@@ -134,7 +134,7 @@ class ViewPost extends Component {
                     >
                       Truth score :
                     </span>{" "}
-                    {this.state.post.ratingScore}%
+                    {Math.round(this.state.post.ratingScore)}%
                   </div>
                 ) : (
                   <div className={classes.MoreInfoEl}>

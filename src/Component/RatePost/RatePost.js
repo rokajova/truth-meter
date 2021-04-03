@@ -67,6 +67,7 @@ export default class RatePost extends Component {
       ratingScore: ratingScoreSum / doc.data().rates.length,
     });
   };
+
   updatePostsCol = async () => {
     const postRef = db
       .collection("Posts")
@@ -78,6 +79,7 @@ export default class RatePost extends Component {
     });
     this.updateRatingScore();
   };
+
   updateUsersCol = () => {
     // get user ref
     const userRef = db.collection("Users").doc(this.props.auth.uid);
