@@ -52,7 +52,8 @@
   font-size: 16px;
   letter-spacing: 1px;
   background: #007bff;
-  border: 1px solid #fff;
+  border: 1px solid rgb(157, 187, 243);
+
   border-radius: 5px;
 }
 .button:hover {

@@ -10,6 +10,7 @@ import Reset from "../Login/Reset";
 import RatePost from "../RatePost/RatePost";
 import Profile from "../Profile/Profile";
 import Search from "../Search/Search";
+import Info from "../Info/Info";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -49,59 +50,18 @@ class RouterManager extends Component {
       <div>
         <Header />
         <Switch>
+          {/* Unprotected routes */}
           <Route path="/" exact>
             <Main />
           </Route>
-
-          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
-          {this.props.auth.isLoaded ? (
-            <ProtectedRoute
-              path="/login"
-              component={AdminOnly(Login, this.props.auth)}
-              isAuth={this.props.auth.isEmpty}
-              redirectpathname="/"
-            />
-          ) : (
-            <div></div>
-          )}
-          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
-          {this.props.auth.isLoaded ? (
-            <ProtectedRoute
-              path="/signup"
-              component={AdminOnly(Signup, this.props.auth)}
-              isAuth={this.props.auth.isEmpty}
-              redirectpathname="/"
-            />
-          ) : (
-            <div></div>
-          )}
-          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
-          {this.props.auth.isLoaded ? (
-            <ProtectedRoute
-              path="/forgot-password"
-              component={AdminOnly(Reset, this.props.auth)}
-              isAuth={this.props.auth.isEmpty}
-              redirectpathname="/"
-            />
-          ) : (
-            <div></div>
-          )}
 
           <Route path="/search">
             <Search />
           </Route>
 
-          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
-          {this.props.auth.isLoaded ? (
-            <ProtectedRoute
-              path="/profile"
-              component={AdminOnly(Profile, this.props.auth)}
-              isAuth={!this.props.auth.isEmpty}
-              redirectpathname="/login"
-            />
-          ) : (
-            <div></div>
-          )}
+          <Route path="/info">
+            <Info />
+          </Route>
 
           <Route path="/post/:id">
             <Route
@@ -115,7 +75,54 @@ class RouterManager extends Component {
             />
           </Route>
 
-          {/* First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {/* Protected routes */}
+          {/* LOGIN First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/login"
+              component={AdminOnly(Login, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
+          {/*SIGNUP First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/signup"
+              component={AdminOnly(Signup, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
+          {/*FORGOT PASSWORD First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/forgot-password"
+              component={AdminOnly(Reset, this.props.auth)}
+              isAuth={this.props.auth.isEmpty}
+              redirectpathname="/"
+            />
+          ) : (
+            <div></div>
+          )}
+
+          {/* PROFILE First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
+          {this.props.auth.isLoaded ? (
+            <ProtectedRoute
+              path="/profile"
+              component={AdminOnly(Profile, this.props.auth)}
+              isAuth={!this.props.auth.isEmpty}
+              redirectpathname="/login"
+            />
+          ) : (
+            <div></div>
+          )}
+
+          {/*NEW-POST First, wait until firebase auth has loaded, then run the custom ProtectedRoute component */}
           {this.props.auth.isLoaded ? (
             <ProtectedRoute
               path="/new-post"

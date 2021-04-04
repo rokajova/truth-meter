@@ -61,7 +61,7 @@ class Header extends Component {
                   <span>LOG IN</span>
                 </Link>
                 <Link onClick={this.toggle} className="nav-links" to="/info">
-                  &nbsp; <i className="fas fa-info mr-1" />
+                  &nbsp; <i className="fas fa-info-circle mr-1" />
                   <span>INFO</span>
                 </Link>
               </ul>

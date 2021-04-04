@@ -25,29 +25,7 @@
   flex: 1;
 }
 
-.Link {
-  text-decoration: none;
-  color: #fff;
-}
-
-.Link:hover {
-  color: #fff;
-}
-
 .Title {
   font-size: 1.5rem;
   background: rgb(61, 53, 131);
-}
-
-.SpanButton {
-  background-color: #6d76f7;
-  border-radius: 10px;
-  padding: 2px;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-}
-
-.SpanButton:hover {
-  color: rgb(61, 53, 131);
-  background: #fff;
 }

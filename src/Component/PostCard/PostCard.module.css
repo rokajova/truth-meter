@@ -1,11 +1,16 @@
 .PostCardContainer {
-  border: 1px solid rgb(206, 223, 255);
+  border: 1px solid rgb(157, 187, 243);
   background: radial-gradient(rgb(64, 62, 126), rgb(61, 53, 131));
   text-align: center;
 }
 
 .PostCardContainer:hover {
-  background: rgb(74, 72, 122);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 19, 73, 0.9),
+    rgba(61, 53, 131, 0.9),
+    rgba(24, 19, 73, 0.9)
+  );
 }
 
 .Link {
