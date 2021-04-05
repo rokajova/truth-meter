@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 // "firebase.auth().currentUser.displayName" the document in the Users collection does not update accordingly.
 // https://stackoverflow.com/questions/40389946/how-do-i-set-the-displayname-of-firebase-user/40429080 <- does not solve the cloud function issue, but does change the display name
 // https://stackoverflow.com/questions/48741932/firebase-authfunctions-create-user-with-displayname <- might solve the isuue, will come back to it later on.
+// https://stackoverflow.com/questions/43509021/how-to-add-username-with-email-and-password-in-firebase <- possible solution
 
 const Signup = () => {
   // required states for authentication

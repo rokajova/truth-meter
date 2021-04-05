@@ -79,7 +79,7 @@ class ViewPost extends Component {
 
       return (
         <div>
-          <div>
+          <div style={{ borderTop: " 1px solid rgb(157, 187, 243)" }}>
             {" "}
             <span className={classes.Link}>{this.state.post.link}</span>
             <span
