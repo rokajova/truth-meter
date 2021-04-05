@@ -7,7 +7,14 @@
     rgba(61, 53, 131, 0.9),
     rgba(24, 19, 73, 0.9)
   );
-  margin: 2% 30px;
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translate(-50%);
+  width: 90%;
+  max-width: 1200px;
+  border: 1px solid rgb(157, 187, 243);
+  border-radius: 10px;
 }
 
 .Row {
@@ -15,10 +22,11 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  padding: 0 15px 0px 15px;
+  text-align: left;
 }
 
 .Col {
-  border: 1px solid rgb(157, 187, 243);
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
@@ -28,4 +36,7 @@
 .Title {
   font-size: 1.5rem;
   background: rgb(61, 53, 131);
+  border: 1px solid rgb(157, 187, 243);
+  border: 1px solid rgb(157, 187, 243);
+  padding-left: 7px;
 }
