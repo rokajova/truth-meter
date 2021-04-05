@@ -26,18 +26,28 @@ exports.newUserSignup = functions.auth.user().onCreate((user) => {
 
 // Update the search index every time a post is written.
 exports.onNoteCreated = functions.firestore
-  .document("Posts/{postID}")
+    .document("Posts/{postID}")
 
-  .onCreate((snap, context) => {
+    .onCreate((snap, context) => {
     // Get the note document
-    const post = snap.data();
+      const post = snap.data();
 
-    // Add an 'objectID' field which Algolia requires
-    post.objectID = context.params.postID;
+      // Add an 'objectID' field which Algolia requires
+      post.objectID = context.params.postID;
 
-    // Write to the algolia index
-    const index = client.initIndex(ALGOLIA_INDEX_NAME);
-    return index.saveObject(post).catch((error) => {
-      console.log(error);
+      // Write to the algolia index
+      const index = client.initIndex(ALGOLIA_INDEX_NAME);
+      return index.saveObject(post).catch((error) => {
+        console.log("ALGOLIA:" + error);
+      });
     });
-  });
+
+// Delete the post record from Algolia once a post is deleted(the post needs to be deleted on the front end, not the back end)
+exports.deletePostFromIndex = functions.firestore
+    .document("Posts/{postId}")
+    .onDelete((snap) => {
+      const index = client.initIndex(ALGOLIA_INDEX_NAME);
+      return index.deleteObject(snap.id).catch((error) => {
+        console.log("ALGOLIA:" + error);
+      });
+    });
