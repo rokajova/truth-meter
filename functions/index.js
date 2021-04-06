@@ -15,6 +15,7 @@ exports.newUserSignup = functions.auth.user().onCreate((user) => {
   return admin.firestore().collection("Users").doc(user.uid).set({
     userID: user.uid,
     userName: user.displayName,
+    userEmail: user.email,
     userPosts: [],
     userRatesID: [],
     userRatesScore: [],
@@ -42,7 +43,8 @@ exports.onNoteCreated = functions.firestore
       });
     });
 
-// Delete the post record from Algolia once a post is deleted(the post needs to be deleted on the front end, not the back end)
+// Delete the post record from Algolia once a post is
+// deleted(the post needs to be deleted on the front end, not the back end)
 exports.deletePostFromIndex = functions.firestore
     .document("Posts/{postId}")
     .onDelete((snap) => {

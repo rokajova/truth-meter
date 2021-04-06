@@ -31,32 +31,20 @@ class Profile extends Component {
     return (
       <div className={classes.Container}>
         <div className={classes.Row}>
-          {this.state.userData.userPosts && (
+         
             <div className={classes.Col}>
-              <div className={classes.Title}>Profile</div>
-              <span
+              <div className={classes.Title}> {this.props.auth.email}</div>
+              {/* <span
                 style={{
                   borderTop: "1px solid  rgb(206, 223, 255)",
                   padding: "3px",
                 }}
               >
-                Email: {this.props.auth.email}
-              </span>
-              <span
-                style={{
-                  borderTop: "1px solid  rgb(206, 223, 255)",
-                  padding: "3px",
-                }}
-              >
-                Current display name:{" "}
-                {firebase.auth().currentUser.displayName ? (
-                  <i>{firebase.auth().currentUser.displayName}</i>
-                ) : (
-                  <i style={{ color: "lightgrey" }}>anonymous</i>
-                )}
-              </span>
+               
+              </span> */}
+    
             </div>
-          )}
+          
         </div>
         <div className={classes.Row}>
           {this.state.userData.userPosts && (

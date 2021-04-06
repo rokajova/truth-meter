@@ -73,6 +73,25 @@ function Info() {
                 . Your new post will now appear in the top of the list in the
                 main page of the website.
               </span>
+              <div className={classes.Title}>
+                Why my posted link doesn't appear in the post?
+              </div>
+              <span
+                style={{
+                  border: "1px solid  rgb(157, 187, 243)",
+                  padding: "7px",
+                  marginBottom: "15px",
+                }}
+              >
+                If you get an error with a message <i>"refused to connect"</i>,
+                that means that website does not allow embedding of it's links.
+                Check the websites embedding options to see if they provide a
+                working link to share.
+                <br />
+                If you get an error with a message{" "}
+                <i>"server IP address could not be found"</i>, that means that
+                link does not exist. Check spelling.
+              </span>
               <div className={classes.Title}>How to rate a post?</div>
               <span
                 style={{
@@ -114,14 +133,14 @@ function Info() {
                 }}
               >
                 The Truth Score is the main arbiter in determining the posts
-                content legitimacy. Each post will have a gauge attached to it
-                displaying the Truth Score of the post. If the needle is
+                content legitimacy. <br /> Each post will have a gauge attached
+                to it displaying the Truth Score of the post. If the needle is
                 pointing at red - the information is most likely to be false, if
-                green - most likely true. A user may rate a post only once. When
-                a rate has been submitted the Truth Score will update and the
-                gauge needle will move in real time displaying the new Truth
-                Score. Only You, the users, are in control of the Truth Score,
-                that is why rating is strongly ecouraged.
+                green - most likely true. <br /> A user may rate a post only
+                once. When a rate has been submitted the Truth Score will update
+                and the gauge needle will move in real time displaying the new
+                Truth Score. Only You, the users, are in control of the Truth
+                Score, that is why rating is strongly ecouraged.
               </span>
               <div className={classes.Title}>What are the rules?</div>
               <span

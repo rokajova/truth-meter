@@ -11,7 +11,7 @@ class NewPost extends Component {
     super(props);
     this.state = {
       // change this to false and add the porper URL in the recapcha dashboard once I golive
-      isCaptchaVerified: true,
+      isCaptchaVerified: false,
 
       tags: [],
 
@@ -21,6 +21,7 @@ class NewPost extends Component {
         createDate: new Date(),
         createUserID: "",
         createUserName: "",
+        createUserEmail: "",
         tags: [],
         popularScore: "",
         rates: [],
@@ -90,10 +91,15 @@ class NewPost extends Component {
 
     const post = this.state.post;
     post.createUserID = this.props.auth.uid;
+    post.createUserEmail = this.props.auth.email;
+
     // a temp workaround to the signup problem, where I cannot update the display name on the firebase signup function
     // (see top commentin Signup component for detailed explanation)
-    post.createUserName = firebase.auth().currentUser.displayName;
-    post.tags = this.state.tags;
+    // post.createUserName = firebase.auth().currentUser.displayName;
+
+    // tags working
+    // post.tags = this.state.tags;
+
     db.collection("Posts")
       .add(post)
       .then((res) => {
@@ -160,6 +166,7 @@ class NewPost extends Component {
             )}
           </div>
         </div>
+
       </section>
     );
   }
