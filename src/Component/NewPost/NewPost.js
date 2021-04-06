@@ -9,6 +9,10 @@ const db = firebase.firestore();
 class NewPost extends Component {
   constructor(props) {
     super(props);
+    
+    this.verifyCallback = this.verifyCallback.bind(this);
+    this.expiredCallback = this.expiredCallback.bind(this);
+
     this.state = {
       // change this to false and add the porper URL in the recapcha dashboard once I golive
       isCaptchaVerified: false,
@@ -148,6 +152,7 @@ class NewPost extends Component {
               render="explicit"
               verifyCallback={this.verifyCallback}
               expiredCallback={this.expiredCallback}
+              theme="dark"
             />
           </div>
 

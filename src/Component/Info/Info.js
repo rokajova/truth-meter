@@ -243,7 +243,7 @@ function Info() {
                 }}
               >
                 <strong>8.</strong> If you found a bug or an exploit for this
-                website, please contact me contact@truthmeter.link .
+                website, please contact me <a href="mailto: contact@truthmeter.link">contact@truthmeter.link </a>.
               </span>
             </div>
           </div>
