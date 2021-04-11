@@ -148,7 +148,7 @@ class NewPost extends Component {
           <div className={classes.Recaptcha}>
             {" "}
             <Recaptcha
-              sitekey="6LdqLJoaAAAAAFRLwSy6kLGzasP9ChtQQnIIo554"
+              sitekey="6Lc8sqUaAAAAACh2Rvquamf372-1SG9Wei-2QxJs"
               render="explicit"
               verifyCallback={this.verifyCallback}
               expiredCallback={this.expiredCallback}
