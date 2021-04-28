@@ -142,7 +142,6 @@ class NewPost extends Component {
               required
               value={this.state.post.link}
               onChange={(e) => this.onChangePostLink(e.target.value)}
-              value={this.state.post.link}
             />{" "}
           </div>
           <div className={classes.Recaptcha}>
